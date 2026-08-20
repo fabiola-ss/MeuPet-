@@ -35,7 +35,7 @@ build:
 
 ```bash
 # baixe do Unsplash (licença livre) e salve como:
-#   fonte/foto-hero.jpg   retrato vertical (~3:4), pet olhando pra câmera
+#   fonte/foto-hero.jpg   faixa horizontal (~3:1), rosto do pet centralizado
 #   fonte/foto-sos.jpg    quadrada (1:1), o recorte vira blob orgânico
 python3 fonte/build.py
 ```

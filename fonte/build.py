@@ -9,7 +9,10 @@ que a página publicada não faça nenhuma requisição externa.
 Fotos reais: basta colocar os arquivos abaixo na pasta fonte/ e rodar de novo.
 Enquanto eles não existirem, a ilustração correspondente é usada no lugar.
 
-    fonte/foto-hero.jpg  -> foto do pet no topo da página (retrato, ~3:4)
+    fonte/foto-hero.jpg  -> foto do pet no topo da página. O slot é uma faixa
+                            larga (100% de largura por 150-200px de altura), então
+                            use um recorte horizontal, ~3:1, com o rosto do pet
+                            centralizado. Foto vertical corta mal aqui.
     fonte/foto-sos.jpg   -> foto do pet na seção Modo SOS (quadrada, 1:1)
 """
 
