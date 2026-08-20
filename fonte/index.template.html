@@ -277,20 +277,36 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   }
 }
 
-/* ---------------------------------------------- 9. Identificação (balões) */
-.balao-lista{display:grid;gap:var(--s4);margin-block:var(--s5) var(--s5)}
-@media (min-width:768px){.balao-lista{grid-template-columns:repeat(2,1fr);gap:var(--s4) var(--s6)}}
-.balao{
-  position:relative;background:var(--branco);border-radius:20px 20px 20px 4px;
-  padding:var(--s4);box-shadow:var(--sh-leve);
-  font-size:var(--body-lg);font-style:italic;color:var(--txt-titulo);margin:0;
+/* ------------------------------------- 9. Identificação (máquina de escrever) */
+.palco{
+  position:relative;min-height:190px;margin-block:var(--s6) var(--s5);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
 }
-.balao::after{content:"";position:absolute;left:0;bottom:-12px;border:6px solid transparent;border-top-color:var(--branco);border-right-color:var(--branco)}
-@media (min-width:768px){
-  .balao-lista .balao:nth-child(even){border-radius:20px 20px 4px 20px}
-  .balao-lista .balao:nth-child(even)::after{left:auto;right:0;border-top-color:var(--branco);border-right-color:transparent;border-left-color:var(--branco)}
-  .balao-lista .balao:nth-child(even){margin-top:var(--s5)}
+@media (min-width:768px){.palco{min-height:170px}}
+.palco-aspas{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  font-family:var(--font-display);font-weight:800;font-size:56px;line-height:1;
+  color:var(--roxo);opacity:.16;pointer-events:none;user-select:none;
 }
+.palco-frase{
+  position:relative;z-index:1;margin:0;max-width:20ch;
+  font-family:var(--font-body);font-style:italic;font-weight:600;
+  font-size:22px;line-height:1.42;color:var(--navy);
+}
+@media (min-width:768px){.palco-frase{font-size:26px;max-width:24ch}}
+.cursor{
+  display:inline-block;width:2px;height:1.05em;margin-left:3px;
+  vertical-align:-.14em;background:var(--magenta);border-radius:1px;
+  animation:piscar 1s steps(2,start) infinite;
+}
+@keyframes piscar{50%{opacity:0}}
+.palco-pontos{display:flex;justify-content:center;gap:var(--s2);margin-top:var(--s5)}
+.palco-pontos li{
+  width:7px;height:7px;border-radius:var(--r-pill);
+  background:rgba(36,20,66,.20);transition:background .3s ease-out,transform .3s ease-out;
+}
+.palco-pontos li.on{background:var(--magenta);transform:scale(1.35)}
 .fecho{max-width:640px;margin-inline:auto;text-align:center}
 .fecho .lead{margin-bottom:var(--s3)}
 
@@ -570,11 +586,21 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
       <p class="lead">Você está no consultório e o veterinário pergunta:</p>
     </div>
 
-    <div class="balao-lista">
-      <blockquote class="balao rv">“Ele já teve isso antes?”</blockquote>
-      <blockquote class="balao rv" style="--d:.08s">“Qual medicamento ele tomou da última vez?”</blockquote>
-      <blockquote class="balao rv" style="--d:.16s">“Quando foi a última vacina?”</blockquote>
-      <blockquote class="balao rv" style="--d:.24s">“Ele tem alguma alergia?”</blockquote>
+    <!-- As 4 falas ficam nesta lista (fonte da verdade do texto e o que o
+         leitor de tela anuncia). O palco abaixo só as reproduz visualmente. -->
+    <ul class="vh" id="falas-veterinario">
+      <li>“Ele já teve isso antes?”</li>
+      <li>“Qual medicamento ele tomou da última vez?”</li>
+      <li>“Quando foi a última vacina?”</li>
+      <li>“Ele tem alguma alergia?”</li>
+    </ul>
+
+    <div class="palco rv" id="palco" aria-hidden="true">
+      <span class="palco-aspas">“</span>
+      <p class="palco-frase"><span class="palco-texto"></span><span class="cursor"></span></p>
+      <ul class="palco-pontos">
+        <li class="on"></li><li></li><li></li><li></li>
+      </ul>
     </div>
 
     <div class="fecho rv">
@@ -1035,6 +1061,58 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   trilha.addEventListener('scroll', atualizarBotoes, { passive: true });
   window.addEventListener('resize', atualizarBotoes);
   atualizarBotoes();
+
+  /* ------------------- máquina de escrever das falas do veterinário ---- */
+  var palco = document.getElementById('palco');
+  if (palco) {
+    var saida = palco.querySelector('.palco-texto');
+    var pontos = palco.querySelectorAll('.palco-pontos li');
+    var falas = Array.prototype.map.call(
+      document.querySelectorAll('#falas-veterinario li'),
+      function (li) { return li.textContent.trim(); }
+    );
+
+    var MS_DIGITA = 45;
+    var MS_APAGA = 25;
+    var MS_PAUSA = 1400;
+    var MS_TROCA = 300;
+
+    function marcar(i) {
+      Array.prototype.forEach.call(pontos, function (ponto, j) {
+        ponto.classList.toggle('on', j === i);
+      });
+    }
+
+    if (reduz.matches || falas.length === 0) {
+      /* sem animação: mostra a primeira fala parada */
+      saida.textContent = falas[0] || '';
+      marcar(0);
+    } else {
+      var atual = 0;
+      var letras = 0;
+      var apagando = false;
+
+      (function ciclo() {
+        var fala = falas[atual];
+
+        if (!apagando) {
+          letras += 1;
+          saida.textContent = fala.slice(0, letras);
+          if (letras < fala.length) { return window.setTimeout(ciclo, MS_DIGITA); }
+          apagando = true;
+          return window.setTimeout(ciclo, MS_PAUSA);
+        }
+
+        letras -= 1;
+        saida.textContent = fala.slice(0, letras);
+        if (letras > 0) { return window.setTimeout(ciclo, MS_APAGA); }
+        apagando = false;
+        atual = (atual + 1) % falas.length;
+        marcar(atual);
+        return window.setTimeout(ciclo, MS_TROCA);
+      }());
+    }
+  }
 
   /* --------------------------------- revelação sutil ao rolar ---------- */
   var alvos = document.querySelectorAll('.rv');
