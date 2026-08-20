@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="480" height="480" role="img">
   <defs>
     <radialGradient id="bg" cx="0.35" cy="0.28" r="0.85">
-      <stop offset="0" stop-color="#FFE8D9"/><stop offset="0.6" stop-color="#FDE1EC"/><stop offset="1" stop-color="#F1E3FA"/>
+      <stop offset="0" stop-color="#FFD9B8"/><stop offset="0.58" stop-color="#FFB088"/><stop offset="1" stop-color="#E97A5A"/>
     </radialGradient>
   </defs>
   <rect width="480" height="480" fill="url(#bg)"/>
 
   <!-- patinhas decorativas ao fundo -->
-  <g fill="#EC1361" opacity="0.10">
+  <g fill="#8A2B12" opacity="0.12">
     <g transform="translate(78,86) rotate(-18) scale(0.9)">
       <ellipse cx="0" cy="10" rx="15" ry="12"/><circle cx="-15" cy="-9" r="6"/><circle cx="-3" cy="-15" r="6"/><circle cx="10" cy="-12" r="6"/><circle cx="18" cy="-1" r="5.4"/>
     </g>
@@ -15,7 +15,7 @@
       <ellipse cx="0" cy="10" rx="15" ry="12"/><circle cx="-15" cy="-9" r="6"/><circle cx="-3" cy="-15" r="6"/><circle cx="10" cy="-12" r="6"/><circle cx="18" cy="-1" r="5.4"/>
     </g>
   </g>
-  <g fill="#9B2FC9" opacity="0.09">
+  <g fill="#8A2B12" opacity="0.10">
     <g transform="translate(400,110) rotate(22) scale(0.75)">
       <ellipse cx="0" cy="10" rx="15" ry="12"/><circle cx="-15" cy="-9" r="6"/><circle cx="-3" cy="-15" r="6"/><circle cx="10" cy="-12" r="6"/><circle cx="18" cy="-1" r="5.4"/>
     </g>

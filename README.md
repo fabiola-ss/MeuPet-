@@ -1,86 +1,145 @@
 # MeuPet+ — Landing Page
 
-Landing page de vendas do aplicativo **MeuPet+**, em **arquivo único**
-(`index.html`): todo o CSS, o JavaScript, as fontes e as ilustrações estão
-embutidos no próprio HTML. **Nenhuma requisição externa** é feita ao abrir a
-página — nem Google Fonts, nem CDN, nem imagem hospedada fora.
+Página de vendas do aplicativo **MeuPet+**, em **arquivo único** (`index.html`):
+CSS, JavaScript, fontes e imagens estão todos embutidos. **Nenhuma requisição
+externa** ao abrir a página. Sem framework, sem etapa de build no deploy —
+o `index.html` sozinho já é o site.
 
-Não há etapa de build para publicar: basta subir o `index.html`.
+## Publicar no Netlify
 
-## Arquivos
+**Add new site → Import an existing project → GitHub → fabiola-ss/MeuPet-**
 
-| Arquivo | Para que serve |
-|---|---|
-| `index.html` | **A página.** É o único arquivo necessário para publicar. |
-| `fonte/index.template.html` | O HTML de origem, com marcadores no lugar das fontes e das imagens. É aqui que se edita o conteúdo. |
-| `fonte/build.py` | Gera o `index.html` a partir do template. Rode depois de editar. |
-| `fonte/hero-app.svg` | Ilustração do celular no topo da página. |
-| `fonte/multipet.svg` | Ilustração da seção "Tem mais de um pet?". |
-| `fonte/sos-pet.svg` | Ilustração da seção "Modo SOS". |
-| `fonte/baloo2.woff2` | Fonte de títulos (Baloo 2, subset latin, licença SIL OFL 1.1). |
-| `fonte/jakarta.woff2` | Fonte de texto (Plus Jakarta Sans, subset latin, licença SIL OFL 1.1). |
+- **Branch to deploy:** `claude/landing-page-html-css-js-kzivtn`
+- **Build command:** deixe **vazio**
+- **Publish directory:** `.` (um ponto)
 
-### Como editar
+Todo push nessa branch republica o site.
 
-```bash
-# 1. edite fonte/index.template.html
-# 2. regere a página
-python3 fonte/build.py
-```
+## Antes de publicar: dois pendentes
 
-Para mudanças pequenas de texto dá para editar o `index.html` direto — mas
-lembre de replicar no template, senão o próximo build desfaz a alteração.
+### 1. Link de checkout
 
-## Pendência antes de publicar
-
-Os três botões de CTA hoje apontam para a seção de oferta (`#oferta`), como
-espaço reservado. **Troque o `href` pelo link real de assinatura/checkout do
-app.** No `fonte/index.template.html` procure por:
+Os três CTAs apontam para a seção de oferta (`#oferta`) como espaço reservado.
+Troque pelo link real de assinatura. Procure no `fonte/index.template.html`:
 
 ```
 <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
 ```
 
-## O que foi seguido
+### 2. Fotos reais de pet
 
-- **Copy:** os textos são exatamente os do arquivo de copy, palavra por
-  palavra — conferido automaticamente, 78 de 78 trechos batendo literalmente.
-- **Design system:** tokens de cor, tipografia (Baloo 2 + Plus Jakarta Sans),
-  escala de espaçamento de 8px, raios (12/24/32/999px), sombras na cor navy da
-  marca e o CTA em gradiente laranja-coral.
-- **Blob orgânico** aplicado só nos dois pontos previstos no design system:
-  "Modo SOS" e "Múltiplos pets". O resto da página usa cards de 24px.
-- **Responsivo:** mobile `<768px`, tablet `768–1023px`, desktop `≥1024px`
-  (o menu vira hambúrguer abaixo de 900px). Nenhum breakpoint tem rolagem
-  horizontal.
-- **Toque:** todo botão, link de menu e pergunta do FAQ tem no mínimo 44px de
-  altura.
-- **Acessibilidade:** HTML semântico (`header`/`main`/`section`/`footer`),
-  hierarquia de headings sem saltos, `alt` em todas as imagens, ícones
-  decorativos com `aria-hidden`, skip link, navegação completa por teclado com
-  anel de foco visível, menu com `aria-expanded`, FAQ em `<details>` (acessível
-  por padrão) e `prefers-reduced-motion` respeitado.
-- **Animação:** revelação sutil (fade + 16px) ao entrar na viewport, com
-  stagger de 0.1s, exatamente como o design system pede — e desligada para quem
-  prefere menos movimento.
+O layout já está montado para foto real em dois pontos — hero e Modo SOS — mas
+os arquivos ainda não estão no repositório. Enquanto não estiverem, uma
+ilustração ocupa o lugar. Para trocar, coloque os arquivos em `fonte/` e rode o
+build:
 
-## Três ajustes de contraste (WCAG AA)
+```bash
+# baixe do Unsplash (licença livre) e salve como:
+#   fonte/foto-hero.jpg   retrato vertical (~3:4), pet olhando pra câmera
+#   fonte/foto-sos.jpg    quadrada (1:1), o recorte vira blob orgânico
+python3 fonte/build.py
+```
 
-Três combinações do design system não alcançam o mínimo de 4.5:1 exigido pela
-WCAG AA. Como a página precisava atender aos dois requisitos, os **tokens
-originais foram mantidos intactos** no `:root` e foi criada uma camada de
-variantes escurecidas, aplicada **somente em texto** — fundos, ícones e
-gradientes seguem exatamente as cores originais.
+O script detecta os arquivos sozinho — `.jpg`, `.jpeg`, `.png` ou `.webp` — e
+embute cada um no `index.html`. Nada mais precisa ser editado. Sugestões de
+busca no Unsplash: *happy dog portrait*, *cat portrait studio*.
 
-| Onde | Original | Usado | Contraste |
+## Arquivos
+
+| Arquivo | Para que serve |
+|---|---|
+| `index.html` | **A página.** Único arquivo necessário para publicar. |
+| `fonte/index.template.html` | HTML de origem, com marcadores no lugar das fontes e imagens. É aqui que se edita. |
+| `fonte/build.py` | Gera o `index.html`. Rode depois de qualquer edição. |
+| `fonte/retrato-pet.svg` | Ilustração provisória do hero (some quando `foto-hero.jpg` existir). |
+| `fonte/sos-pet.svg` | Ilustração provisória do Modo SOS (some quando `foto-sos.jpg` existir). |
+| `fonte/multipet.svg` | Ilustração da seção "Tem mais de um pet?". |
+| `fonte/hero-app.svg` | Mockup do app na seção "A virada". |
+| `fonte/baloo2.woff2` | Baloo 2 (Google Fonts, subset latin, SIL OFL 1.1). |
+| `fonte/jakarta.woff2` | Plus Jakarta Sans (Google Fonts, subset latin, SIL OFL 1.1). |
+
+## Ritmo visual das seções
+
+Três blocos de cor sólida cheia quebram o creme e criam os pontos altos do
+scroll. As transições entre sólido e creme nunca são um corte reto:
+
+| # | Seção | Fundo | Transição |
 |---|---|---|---|
-| Rótulo do botão CTA | branco sobre o gradiente | navy `#241442` (`--color-cta-ink`) | 2.35:1 → 5.12:1 |
-| Legendas e disclaimers | `#8B839A` | `#6E6680` (`--color-text-muted-aa`) | 3.37:1 → 5.06:1 |
-| Texto de tag/badge laranja | `#FF6B35` | `#A63C0E` (`--color-ink-orange-aa`) | 2.40:1 → 5.44:1 |
-| Texto de tag/badge rosa | `#EC1361` | `#B80D4B` (`--color-ink-pink-aa`) | 3.55:1 → 5.37:1 |
-| Preço "R$ 12,90/mês" | gradiente laranja | gradiente magenta→roxo da marca | 2.35:1 → 4.35:1 |
+| 1 | Hero | **sólido** — gradiente magenta→roxo, texto branco | scalloped ↓ |
+| 2 | Identificação | creme | — |
+| 3 | Problema | creme-alt | — |
+| 4 | Virada/Solução | creme | — |
+| 5 | Features | creme-alt | — |
+| 6 | Multi-pet | creme (blob) | — |
+| 7 | Modo SOS | **sólido** — navy-plum escuro, texto branco (blob na foto) | onda ↑ e ↓ |
+| 8 | Como funciona | creme | — |
+| 9 | Oferta | **sólido** — gradiente laranja-coral | onda ↑, scalloped ↓ |
+| 10 | Garantia | creme-alt | — |
+| 11 | FAQ | creme | — |
+| 12 | CTA final | creme | — |
 
-Para voltar ao branco no botão CTA (aceitando a perda de contraste), basta
-mudar `--color-cta-ink` para `#FFFFFF`.
+## Variação de composição
 
-O badge roxo (`#9B2FC9` sobre `#F1E3FA`, 4.70:1) já passava e ficou intacto.
+Cada seção usa um tratamento diferente, para a página não virar uma pilha de
+cards brancos iguais:
+
+- **Hero** — foto do pet ocupando a lateral direita inteira, encostando na
+  borda da tela e se dissolvendo no gradiente. Sem moldura, sem card. Uma única
+  pill de destaque, para a headline mandar.
+- **Identificação** — as falas do consultório em balões de conversa com rabicho,
+  alternados, não em cards simétricos.
+- **Problema** — lista nua: ícone + texto lado a lado, separados só por um filete.
+  Nenhum card.
+- **Virada** — texto à esquerda e o mockup do app solto à direita, sem moldura.
+- **Features** — carrossel horizontal com scroll-snap; o próximo card fica
+  cortado na lateral, mostrando que tem mais pra rolar. Setas no desktop,
+  arraste no mobile, e a trilha é focável pelo teclado.
+- **Multi-pet / Modo SOS** — os dois únicos pontos com blob de `border-radius`
+  assimétrico, com recortes diferentes entre si.
+- **Como funciona** — timeline com linha de conexão, sem card.
+- **Garantia** — linhas simples com check, sem card.
+- **FAQ** — acordeão de filetes, sem card.
+
+Sombras nunca são cinza: `rgba(36,20,66,…)` da navy da marca nos cards e
+`rgba(255,107,53,.35)` no CTA.
+
+## Tipografia
+
+Escala reduzida, conforme especificado:
+
+| Papel | Tamanho |
+|---|---|
+| H1 | 40px desktop / 30px mobile |
+| H2 | 30px desktop / 24px mobile |
+| H3 | 20px |
+| Subheadline/destaque | 16px, line-height 1.6 |
+| Corpo | 15px, line-height 1.6 |
+| Legendas, FAQ, disclaimers | 13px |
+
+Baloo 2 nos títulos, Plus Jakarta Sans no corpo — os arquivos do Google Fonts,
+embutidos em base64 em vez de linkados. Mesmas fontes, mesma renderização, sem
+as duas requisições externas e sem o flash de fonte trocando durante o
+carregamento. Para voltar ao `<link>` do Google Fonts, é só trocar os dois
+blocos `@font-face` no topo do `<style>`.
+
+## Contraste
+
+Todos os pares de texto passam WCAG AA (≥4.5:1), com duas exceções que vêm da
+identidade visual definida no briefing:
+
+| Onde | Contraste | Observação |
+|---|---|---|
+| Rótulo branco no botão CTA laranja | **2.35:1** | branco bold sobre o gradiente, conforme especificado |
+| Corpo branco no hero (extremo magenta) | **4.35:1** | o máximo possível sobre `#EC1361`; no extremo roxo dá 5.76:1 |
+
+O bloco de oferta usa texto navy sobre o laranja (5.12–7.14:1) em vez de branco,
+que ali daria 2.35:1. Se quiser branco no botão CTA com contraste de verdade, o
+caminho é escurecer o gradiente — a partir de `#C24A16` o branco passa em 4.9:1.
+
+## Acessibilidade
+
+HTML semântico, hierarquia de headings sem saltos, `alt` em todas as imagens,
+ícones decorativos com `aria-hidden`, skip link, navegação completa por teclado
+com anel de foco visível, menu com `aria-expanded`, carrossel focável e
+anunciado como região, FAQ em `<details>` e `prefers-reduced-motion` respeitado.
+Toda área de toque tem no mínimo 44px.
