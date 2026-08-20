@@ -398,26 +398,41 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .selo-sos svg{width:16px;height:16px}
 
 /* ------------------------------------------- 15. Como funciona (timeline) */
-.passos{display:grid;gap:var(--s5);position:relative}
+.passos{display:grid;gap:28px;position:relative}
+.passo{position:relative;padding-left:60px}
+/* trilha pontilhada ligando um passo ao outro */
+.passo:not(:last-child)::before{
+  content:"";position:absolute;left:19px;top:36px;bottom:-26px;
+  border-left:2px dashed rgba(155,47,201,.32);
+}
+.passo-num{
+  position:absolute;left:2px;top:-6px;width:36px;height:36px;border-radius:var(--r-pill);
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--badge-roxo-bg);color:var(--badge-roxo-txt);
+  font-family:var(--font-display);font-weight:800;font-size:15px;line-height:1;
+}
+/* título do passo: outra família, outro peso e outra cor que o H2 da seção */
+.passo h3{
+  font-family:var(--font-body);font-weight:700;font-size:17px;line-height:1.35;
+  letter-spacing:0;color:var(--roxo);margin-bottom:5px;
+}
+.passo p{font-size:var(--body);line-height:1.55;color:var(--txt-corpo)}
+
 @media (min-width:900px){
   .passos{grid-template-columns:repeat(4,1fr);gap:var(--s5)}
   .passos::before{
-    content:"";position:absolute;top:23px;left:12%;right:12%;height:2px;
-    background:linear-gradient(90deg,#EC1361,#9B2FC9,#FF6B35);opacity:.35;
+    content:"";position:absolute;top:19px;left:12%;right:12%;
+    border-top:2px dashed rgba(155,47,201,.32);
   }
+  .passo{padding-left:0;text-align:center}
+  .passo:not(:last-child)::before{display:none}
+  .passo-num{
+    position:static;margin:0 auto 14px;
+    /* anel creme para a linha pontilhada não encostar no número */
+    box-shadow:0 0 0 6px var(--creme);
+  }
+  .passo h3{font-size:18px}
 }
-.passo{position:relative;padding-left:64px}
-@media (min-width:900px){.passo{padding-left:0;text-align:center}}
-.passo-num{
-  position:absolute;left:0;top:0;width:48px;height:48px;border-radius:var(--r-pill);
-  display:inline-flex;align-items:center;justify-content:center;
-  background:var(--branco);border:2px solid rgba(155,47,201,.28);
-  font-family:var(--font-display);font-weight:800;font-size:var(--body-lg);color:var(--magenta);
-  box-shadow:var(--sh-leve);
-}
-@media (min-width:900px){.passo-num{position:static;margin:0 auto var(--s4)}}
-.passo h3{margin-bottom:var(--s2);font-size:var(--h3)}
-.passo p{font-size:var(--body)}
 
 /* ----------------------------------------------- 16. Oferta (laranja cheio) */
 .oferta{background:var(--grad-oferta);color:var(--navy)}
