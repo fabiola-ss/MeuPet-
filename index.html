@@ -514,14 +514,16 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .oferta .nota--clara{color:var(--navy);opacity:.85;font-style:italic;font-size:var(--caption)}
 
 /* ------------------------------------------------------- 17. Garantia */
-.garantias{display:grid;gap:var(--s3);max-width:720px;margin-bottom:var(--s5)}
+.garantias{display:grid;gap:var(--s3);max-width:720px;margin-bottom:0}
 .garantias li{display:flex;align-items:flex-start;gap:var(--s3)}
+/* mesmo tratamento dos ícones do carrossel: quadrado arredondado, pastel rosa */
 .check{
-  width:26px;height:26px;flex:none;margin-top:2px;border-radius:var(--r-pill);
-  background:rgba(47,169,122,.16);color:#1F7A57;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;flex:none;margin-top:-3px;border-radius:9px;
+  background:#FCE1EC;color:var(--magenta);
+  display:inline-flex;align-items:center;justify-content:center;
 }
-.check svg{width:15px;height:15px}
-.garantias p{margin:0;font-size:var(--body-lg);color:var(--txt-titulo)}
+.check svg{width:16px;height:16px}
+.garantias p{margin:0;font-size:var(--body-lg);font-weight:400;line-height:1.5;color:var(--txt-titulo)}
 
 /* ------------------------------------------------------------ 18. FAQ */
 .faq{max-width:780px;margin-inline:auto;border-top:1px solid rgba(36,20,66,.12)}
@@ -949,7 +951,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 <section class="section bg-alt" id="garantia" aria-labelledby="garantia-titulo">
   <div class="container">
     <div class="head rv">
-      <span class="rotulo rotulo--laranja">Risco zero</span>
       <h2 id="garantia-titulo">Sem pegadinha, sem letra miúda.</h2>
     </div>
 
@@ -967,8 +968,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         <p>Nenhuma multa, nenhuma fidelidade.</p>
       </li>
     </ul>
-
-    <p class="lead rv" style="max-width:640px">Se em algum momento o Meu Pet+ não fizer sentido pra você, é só cancelar. Simples assim.</p>
   </div>
 </section>
 
