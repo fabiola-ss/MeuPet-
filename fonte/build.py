@@ -13,7 +13,6 @@ Enquanto eles não existirem, a ilustração correspondente é usada no lugar.
                             larga (100% de largura por 150-200px de altura), então
                             use um recorte horizontal, ~3:1, com o rosto do pet
                             centralizado. Foto vertical corta mal aqui.
-    fonte/foto-sos.jpg   -> foto do pet na seção Modo SOS (quadrada, 1:1)
 """
 
 import base64
@@ -33,7 +32,6 @@ ALVOS = [
     ("__FONT_BALOO__",   ["baloo2.woff2"],                       True),
     ("__FONT_JAKARTA__", ["jakarta.woff2"],                      True),
     ("__FOTO_HERO__",    ["foto-hero", "retrato-pet.svg"],       False),
-    ("__FOTO_SOS__",     ["foto-sos", "sos-pet.svg"],            False),
     ("__IMG_APP__",      ["hero-app.svg"],                       False),
 ]
 

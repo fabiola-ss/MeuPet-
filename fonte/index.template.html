@@ -40,7 +40,6 @@
   --grad-cta:linear-gradient(90deg,#FF8A3D 0%,#FF4D4D 100%);
   --grad-marca:linear-gradient(135deg,#EC1361 0%,#9B2FC9 100%);
   --grad-oferta:linear-gradient(135deg,#FF8A3D 0%,#FF4D4D 100%);
-  --grad-sos:linear-gradient(150deg,#241442 0%,#3D1B63 55%,#2A1148 100%);
 
   /* fundos */
   --creme:#FDF6EE;
@@ -78,8 +77,6 @@
 
   /* raios */
   --r-sm:12px; --r-md:24px; --r-lg:32px; --r-pill:999px;
-  --blob-a:42% 58% 65% 35%/45% 40% 60% 55%;
-  --blob-b:58% 42% 38% 62%/52% 62% 38% 48%;
 
   /* sombras — sempre na cor navy da marca, nunca cinza */
   --sh-leve:0 4px 16px rgba(36,20,66,.06);
@@ -450,30 +447,57 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .dica-rolar svg{width:16px;height:16px;flex:none}
 @media (min-width:768px){.dica-rolar{display:none}}
 
-/* --------------------------------------------------- 13. Multi-pet (blob) */
-.duas-colunas{display:grid;gap:var(--s6);align-items:center}
-@media (min-width:900px){
-  .duas-colunas{grid-template-columns:1fr 1fr}
-  .duas-colunas--inverso .col-media{order:-1}
-}
-.col-copy p{font-size:var(--body-lg)}
-.col-media{display:flex;justify-content:center}
-.blob{width:min(100%,400px);aspect-ratio:1/1;object-fit:cover;border-radius:var(--blob-a);box-shadow:var(--sh-media)}
-.blob--b{border-radius:var(--blob-b)}
+/* ----------------------------------- 13. Modo SOS (cartão de emergência) */
+.sos{background:linear-gradient(170deg,#2B1A4D 0%,#3D2168 100%)}
+/* 36/42px de folga a partir da onda, que avança sobre a seção */
+#modo-sos{padding-block:calc(36px + var(--edge)) calc(42px + var(--edge))}
+.sos-conteudo{max-width:360px;margin-inline:auto;text-align:center}
+/* nada de cor de parágrafo no nível da seção: ela vazaria para dentro do
+   cartão branco e deixaria labels e dados brancos sobre branco */
 
-/* --------------------------------------------------- 14. Modo SOS (escuro) */
-.sos{background:var(--grad-sos)}
-.sos p{color:rgba(255,255,255,.88)}
-.sos .col-copy p strong{color:#FFFFFF}
-.sos .blob{box-shadow:0 24px 60px rgba(0,0,0,.38)}
 .selo-sos{
   display:inline-flex;align-items:center;gap:var(--s2);
-  background:rgba(255,107,53,.18);border:1px solid rgba(255,138,61,.55);color:#FFB088;
-  font-weight:700;font-size:var(--caption);
-  letter-spacing:.06em;text-transform:uppercase;padding:7px 15px;border-radius:var(--r-pill);
-  margin-bottom:var(--s4);
+  border:1.5px solid rgba(255,107,53,.5);background:rgba(255,107,53,.12);
+  color:#FFB08A;font-size:11.5px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;line-height:1.4;
+  padding:7px 15px;border-radius:var(--r-pill);margin-bottom:18px;
 }
-.selo-sos svg{width:16px;height:16px}
+.selo-sos svg{width:14px;height:14px;flex:none;stroke:#FF8A5B;stroke-width:2.5}
+
+#modo-sos h2{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:14px}
+.sos-intro{font-size:15px;line-height:1.6;color:rgba(255,255,255,.82);margin-bottom:28px}
+
+/* --- cartão de emergência --- */
+.sos-cartao{
+  background:var(--branco);border-radius:22px;overflow:hidden;text-align:left;
+  box-shadow:0 16px 38px rgba(0,0,0,.32);
+}
+.sos-cartao-topo{
+  background:linear-gradient(90deg,#FF6B35,#E8342F);
+  padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:var(--s3);
+}
+.sos-cartao-marca{display:inline-flex;align-items:center;gap:var(--s2);color:#FFFFFF;font-size:13px;font-weight:800;letter-spacing:.05em}
+.sos-cartao-marca svg{width:17px;height:17px;flex:none;stroke:#FFFFFF;stroke-width:2.6}
+.sos-cartao-pet{color:rgba(255,255,255,.9);font-size:11px;font-weight:600;white-space:nowrap}
+
+.sos-cartao-corpo{padding:16px}
+.sos-divisoria{height:1px;background:#F0EBE4;margin:14px 0}
+.sos-label{
+  font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:#8B839A;margin-bottom:6px;
+}
+.sos-chips{display:flex;flex-wrap:wrap;gap:6px}
+.sos-chip{
+  font-size:12px;font-weight:600;line-height:1.3;padding:6px 11px;border-radius:var(--r-pill);
+}
+.sos-chip--alerta{background:#FFE4DC;color:#C43D1E}
+.sos-chip--remedio{background:#F1E3FA;color:#7B21A8}
+.sos-dado{font-size:13px;font-weight:600;line-height:1.35;color:var(--navy);margin:0}
+.sos-detalhe{font-size:11.5px;font-weight:500;line-height:1.35;color:#8B839A;margin:2px 0 0}
+
+.sos-legenda{
+  margin-top:18px;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.6);
+}
 
 /* ------------------------------------------- 15. Como funciona (timeline) */
 .passos{display:grid;gap:28px;position:relative}
@@ -904,26 +928,66 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </div>
 </section>
 
-<!-- ============ 6. MODO SOS — bloco sólido escuro, foto em blob ========== -->
+<!-- ============ 6. MODO SOS — bloco escuro com o cartão de emergência === -->
 <section class="section solida sos com-borda-topo com-borda-base" id="modo-sos" aria-labelledby="sos-titulo">
   <svg class="borda borda--topo" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
     <path d="M0 0v34c180 28 360-22 600-4 240 18 420-22 600-4V0Z" fill="#F5EEE3"/>
   </svg>
 
   <div class="container">
-    <div class="duas-colunas duas-colunas--inverso">
-      <div class="col-copy rv">
-        <p class="selo-sos">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 21.5 19.5a1.8 1.8 0 0 1-1.6 2.7H4.1a1.8 1.8 0 0 1-1.6-2.7z"/><path d="M12 9.5v5"/><path d="M12 18h.01"/></svg>
-          Emergência
-        </p>
+    <div class="sos-conteudo">
+      <div class="rv">
+        <p class="selo-sos"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 21.5 19.5a1.8 1.8 0 0 1-1.6 2.7H4.1a1.8 1.8 0 0 1-1.6-2.7z"/><path d="M12 9.5v5"/><path d="M12 18h.01"/></svg>
+          Emergência</p>
         <h2 id="sos-titulo">E numa emergência, cada segundo conta.</h2>
-        <p class="lead"><strong>Modo SOS</strong> <span aria-hidden="true">🆘</span> — as informações essenciais do seu pet reunidas numa tela só: alergias, medicamentos em uso e dados de saúde importantes.</p>
-        <p class="lead">Em vez de procurar no meio da correria, você abre o app e já sabe o que responder.</p>
+        <p class="sos-intro">O Modo SOS reúne tudo que o veterinário precisa saber numa tela só — pronta pra mostrar, sem procurar nada.</p>
       </div>
-      <div class="col-media rv" style="--d:.12s">
-        <img class="blob blob--b" src="__FOTO_SOS__" width="480" height="480" alt="Cachorro usando uma coleira com plaquinha de alerta, representando o Modo SOS do aplicativo." loading="lazy" decoding="async">
+
+      <div class="sos-cartao rv" style="--d:.12s">
+        <div class="sos-cartao-topo">
+          <span class="sos-cartao-marca"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 21.5 19.5a1.8 1.8 0 0 1-1.6 2.7H4.1a1.8 1.8 0 0 1-1.6-2.7z"/><path d="M12 9.5v5"/><path d="M12 18h.01"/></svg>
+          MODO SOS</span>
+          <span class="sos-cartao-pet">Thor · 4 anos</span>
+        </div>
+
+        <div class="sos-cartao-corpo">
+          <div>
+            <p class="sos-label">Alergias</p>
+            <div class="sos-chips">
+              <span class="sos-chip sos-chip--alerta">Frango</span>
+              <span class="sos-chip sos-chip--alerta">Fipronil</span>
+            </div>
+          </div>
+
+          <div class="sos-divisoria" aria-hidden="true"></div>
+
+          <div>
+            <p class="sos-label">Medicamentos em uso</p>
+            <div class="sos-chips">
+              <span class="sos-chip sos-chip--remedio">Apoquel 16mg</span>
+              <span class="sos-chip sos-chip--remedio">Omega 3</span>
+            </div>
+          </div>
+
+          <div class="sos-divisoria" aria-hidden="true"></div>
+
+          <div>
+            <p class="sos-label">Dados essenciais</p>
+            <p class="sos-dado">Golden Retriever · 32 kg</p>
+            <p class="sos-detalhe">Castrado · Microchip 982000123456789</p>
+          </div>
+
+          <div class="sos-divisoria" aria-hidden="true"></div>
+
+          <div>
+            <p class="sos-label">Veterinário de referência</p>
+            <p class="sos-dado">Clínica VetSul</p>
+            <p class="sos-detalhe">(54) 99123-4567</p>
+          </div>
+        </div>
       </div>
+
+      <p class="sos-legenda rv">Uma tela. Tudo que importa na hora certa.</p>
     </div>
   </div>
 

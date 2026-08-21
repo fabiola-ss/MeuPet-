@@ -36,7 +36,6 @@ build:
 ```bash
 # baixe do Unsplash (licença livre) e salve como:
 #   fonte/foto-hero.jpg   faixa horizontal (~3:1), rosto do pet centralizado
-#   fonte/foto-sos.jpg    quadrada (1:1), o recorte vira blob orgânico
 python3 fonte/build.py
 ```
 
@@ -52,7 +51,6 @@ busca no Unsplash: *happy dog portrait*, *cat portrait studio*.
 | `fonte/index.template.html` | HTML de origem, com marcadores no lugar das fontes e imagens. É aqui que se edita. |
 | `fonte/build.py` | Gera o `index.html`. Rode depois de qualquer edição. |
 | `fonte/retrato-pet.svg` | Ilustração provisória do hero (some quando `foto-hero.jpg` existir). |
-| `fonte/sos-pet.svg` | Ilustração provisória do Modo SOS (some quando `foto-sos.jpg` existir). |
 | `fonte/hero-app.svg` | Mockup do app na seção "A virada". |
 | `fonte/baloo2.woff2` | Baloo 2 (Google Fonts, subset latin, SIL OFL 1.1). |
 | `fonte/jakarta.woff2` | Plus Jakarta Sans (Google Fonts, subset latin, SIL OFL 1.1). |
@@ -69,7 +67,7 @@ scroll. As transições entre sólido e creme nunca são um corte reto:
 | 3 | Problema | creme-alt | — |
 | 4 | Virada/Solução | creme | — |
 | 5 | Features | creme-alt | — |
-| 7 | Modo SOS | **sólido** — navy-plum escuro, texto branco (blob na foto) | onda ↑ e ↓ |
+| 7 | Modo SOS | **sólido** — roxo escuro, cartão de emergência | onda ↑ e ↓ |
 | 8 | Como funciona | creme | — |
 | 9 | Oferta | **sólido** — gradiente laranja-coral | onda ↑, scalloped ↓ |
 | 10 | Garantia | creme-alt | — |
