@@ -272,28 +272,34 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   .hero-foto img{height:200px}
 }
 
-/* ------------------------------------- 9. Identificação (máquina de escrever) */
-/* espaçamentos escopados na seção, para não afetar .head/.lead das outras */
-#identificacao .head{margin-bottom:0}
-#identificacao .head h2{margin-bottom:14px}
-#identificacao .head .lead{font-size:15px;line-height:1.55;opacity:.85;margin-bottom:0}
+/* --------------------------- 9. Identificação (cena: pergunta -> app) */
+#identificacao{padding-block:34px 40px}
+.cena{text-align:center}
+#identificacao h2{font-size:25px;font-weight:800;margin-bottom:10px}
+.cena-contexto{
+  font-size:14px;line-height:1.5;color:var(--txt-corpo);opacity:.8;
+  max-width:34ch;margin:0 auto 26px;
+}
 
-.palco{
-  position:relative;text-align:left;
-  max-width:520px;margin:34px auto 26px;padding-top:26px;
+/* palco: a linha do veterinário e o celular compartilham a mesma coluna */
+.cena-palco{max-width:330px;margin-inline:auto;text-align:left}
+
+/* --- pergunta do veterinário --- */
+.cena-vet{display:flex;gap:10px;margin-bottom:14px}
+.cena-avatar{
+  width:34px;height:34px;flex:none;border-radius:var(--r-pill);
+  background:linear-gradient(150deg,#F1E3FA,#E3D0F5);
+  display:inline-flex;align-items:center;justify-content:center;font-size:16px;line-height:1;
 }
-.palco-aspas{
-  position:absolute;top:0;left:-6px;
-  font-family:var(--font-display);font-weight:800;font-size:60px;line-height:1;
-  color:var(--roxo);opacity:.18;pointer-events:none;user-select:none;
+.cena-vet-txt{display:flex;flex-direction:column;min-width:0}
+.cena-vet-label{
+  font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:#8B839A;margin-bottom:3px;
 }
-.palco-frase{
-  position:relative;z-index:1;margin:0;
-  font-family:var(--font-body);font-style:italic;font-weight:500;
-  font-size:24px;line-height:1.4;color:var(--navy);
-  /* altura reservada para a frase mais longa (2 linhas em qualquer largura),
-     para o ciclo não pular layout nem sobrar espaço vazio */
-  min-height:calc(2 * 1.4em);
+.cena-pergunta{
+  font-size:15.5px;font-weight:500;font-style:italic;line-height:1.35;color:var(--navy);
+  /* duas linhas reservadas: a pergunta mais longa ocupa duas em qualquer largura */
+  min-height:calc(2 * 1.35em);
 }
 .cursor{
   display:inline-block;width:2px;height:1.05em;margin-left:3px;
@@ -301,9 +307,64 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   animation:piscar 1s steps(2,start) infinite;
 }
 @keyframes piscar{50%{opacity:0}}
-.fecho{max-width:640px;margin-inline:auto;text-align:center}
-.fecho .lead{margin-bottom:14px}
-.fecho .lead:last-child{margin-bottom:0}
+
+/* --- seta --- */
+.cena-seta{
+  margin:2px 0 10px;text-align:center;font-size:16px;line-height:1;
+  color:var(--roxo);opacity:.45;
+}
+
+/* --- celular respondendo --- */
+.cena-fone{
+  background:var(--navy);border-radius:26px;padding:8px;
+  box-shadow:0 14px 34px rgba(36,20,66,.22);
+}
+.cena-tela{background:var(--branco);border-radius:20px;overflow:hidden}
+.cena-topo{
+  background:linear-gradient(100deg,#EC1361,#9B2FC9);
+  padding:12px 14px;display:flex;align-items:center;gap:9px;
+}
+.cena-pata{
+  width:26px;height:26px;flex:none;border-radius:var(--r-pill);background:var(--branco);
+  display:inline-flex;align-items:center;justify-content:center;font-size:13px;line-height:1;
+}
+.cena-pet{display:flex;flex-direction:column;min-width:0}
+.cena-pet-nome{color:#FFFFFF;font-size:12.5px;font-weight:700;line-height:1.3}
+.cena-pet-sub{color:rgba(255,255,255,.75);font-size:10px;line-height:1.3}
+
+.cena-corpo{padding:14px;transition:opacity .3s ease-out}
+.cena-corpo.trocando{opacity:0}
+.cena-label{
+  font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:#8B839A;margin-bottom:9px;
+}
+.cena-entrada{
+  display:flex;gap:10px;padding:10px;border-radius:13px;background:var(--creme);margin-bottom:7px;
+}
+.cena-entrada:last-child{margin-bottom:0}
+.cena-ic{
+  width:30px;height:30px;flex:none;border-radius:9px;
+  display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;
+}
+.cena-ic--rosa{background:#FCE1EC}
+.cena-ic--roxo{background:#F1E3FA}
+.cena-txt{display:flex;flex-direction:column;min-width:0}
+.cena-nome{font-size:12.5px;font-weight:700;line-height:1.3;color:var(--navy)}
+.cena-det{font-size:11px;line-height:1.35;color:#8B839A;margin-top:2px}
+
+/* --- pontinhos --- */
+.cena-pontos{display:flex;justify-content:center;gap:var(--s2);margin-top:22px}
+.cena-pontos li{
+  width:6px;height:6px;border-radius:var(--r-pill);
+  background:rgba(36,20,66,.15);transition:background .3s ease-out,transform .3s ease-out;
+}
+.cena-pontos li.on{background:var(--magenta);transform:scale(1.3)}
+
+/* --- fechamento --- */
+.cena-fecho{
+  margin:26px auto 0;max-width:32ch;
+  font-size:15px;font-weight:700;line-height:1.45;color:var(--navy);
+}
 
 /* --------------------------------- 10. Problema (lista sem card, só linha) */
 .lista-nua{margin-block:var(--s5);max-width:760px}
@@ -637,31 +698,55 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </svg>
 </section>
 
-<!-- ================================ 2. IDENTIFICAÇÃO — creme ============= -->
+<!-- ================== 2. IDENTIFICAÇÃO — a pergunta e a resposta ======== -->
 <section class="section bg-creme" id="identificacao" aria-labelledby="identificacao-titulo">
   <div class="container">
-    <div class="head head--center rv">
+    <div class="cena rv">
       <h2 id="identificacao-titulo">Você já passou por isso?</h2>
-      <p class="lead">Você está no consultório e o veterinário pergunta:</p>
-    </div>
+      <p class="cena-contexto">No consultório, o veterinário pergunta — e você precisa lembrar na hora.</p>
 
-    <!-- As 4 falas ficam nesta lista (fonte da verdade do texto e o que o
-         leitor de tela anuncia). O palco abaixo só as reproduz visualmente. -->
-    <ul class="vh" id="falas-veterinario">
-      <li>“Ele já teve isso antes?”</li>
-      <li>“Qual medicamento ele tomou da última vez?”</li>
-      <li>“Quando foi a última vacina?”</li>
-      <li>“Ele tem alguma alergia?”</li>
-    </ul>
+      <!-- As 4 perguntas ficam nesta lista: é a fonte da verdade do texto e o
+           que o leitor de tela anuncia. O palco abaixo só as encena. -->
+      <ul class="vh" id="falas-veterinario">
+        <li>“Ele já teve isso antes?”</li>
+        <li>“Qual medicamento ele tomou da última vez?”</li>
+        <li>“Quando foi a última vacina?”</li>
+        <li>“Ele tem alguma alergia?”</li>
+      </ul>
 
-    <div class="palco rv" id="palco" aria-hidden="true">
-      <span class="palco-aspas">“</span>
-      <p class="palco-frase"><span class="palco-texto"></span><span class="cursor"></span></p>
-    </div>
+      <div class="cena-palco" id="cena" aria-hidden="true">
+        <div class="cena-vet">
+          <span class="cena-avatar">🩺</span>
+          <span class="cena-vet-txt">
+            <span class="cena-vet-label">Veterinário</span>
+            <span class="cena-pergunta"><span class="cena-texto"></span><span class="cursor"></span></span>
+          </span>
+        </div>
 
-    <div class="fecho rv">
-      <p class="lead">E você tenta lembrar. Ou procura no celular. Ou liga pra clínica anterior torcendo pra alguém atender.</p>
-      <p class="lead"><strong>Se isso já aconteceu com você, o Meu Pet+ foi feito exatamente pra essa hora.</strong></p>
+        <p class="cena-seta">↓</p>
+
+        <div class="cena-fone">
+          <div class="cena-tela">
+            <div class="cena-topo">
+              <span class="cena-pata">🐾</span>
+              <span class="cena-pet">
+                <span class="cena-pet-nome">Thor</span>
+                <span class="cena-pet-sub">Golden Retriever · 4 anos</span>
+              </span>
+            </div>
+            <div class="cena-corpo" id="cena-corpo">
+              <p class="cena-label"></p>
+              <div class="cena-entradas"></div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="cena-pontos">
+          <li class="on"></li><li></li><li></li><li></li>
+        </ul>
+      </div>
+
+      <p class="cena-fecho">Você não precisa lembrar. O Meu Pet+ lembra por você.</p>
     </div>
   </div>
 </section>
@@ -1094,28 +1179,122 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   window.addEventListener('resize', atualizarBotoes);
   atualizarBotoes();
 
-  /* ------------------- máquina de escrever das falas do veterinário ---- */
-  var palco = document.getElementById('palco');
-  if (palco) {
-    var saida = palco.querySelector('.palco-texto');
+  /* ------- a cena: pergunta do veterinário e a resposta dentro do app -- */
+  var cena = document.getElementById('cena');
+  if (cena) {
+    var saida = cena.querySelector('.cena-texto');
+    var corpo = document.getElementById('cena-corpo');
+    var rotulo = corpo.querySelector('.cena-label');
+    var entradas = corpo.querySelector('.cena-entradas');
+    var pontos = cena.querySelectorAll('.cena-pontos li');
+
     var falas = Array.prototype.map.call(
       document.querySelectorAll('#falas-veterinario li'),
       function (li) { return li.textContent.trim(); }
     );
+
+    /* Conteúdo ilustrativo do app, um por pergunta e na mesma ordem da lista
+       acima. É amostra de interface, não copy da página. */
+    var CENAS = [
+      { rotulo: 'Histórico de consultas', itens: [
+        { icone: '🩺', tom: 'rosa', nome: 'Dermatite alérgica', det: '12 mar 2025 · Clínica VetSul' },
+        { icone: '🧪', tom: 'roxo', nome: 'Exame de pele — resultado anexado', det: '14 mar 2025' }
+      ]},
+      { rotulo: 'Medicamentos', itens: [
+        { icone: '💊', tom: 'rosa', nome: 'Apoquel 16mg', det: '1x ao dia · 14 dias' },
+        { icone: '💊', tom: 'roxo', nome: 'Antibiótico Cefalexina', det: 'Finalizado em 26 mar 2025' }
+      ]},
+      { rotulo: 'Vacinas', itens: [
+        { icone: '💉', tom: 'rosa', nome: 'V10 (múltipla)', det: '08 jan 2025 · próxima em jan 2026' },
+        { icone: '💉', tom: 'roxo', nome: 'Antirrábica', det: '08 jan 2025' }
+      ]},
+      { rotulo: 'Alergias registradas', itens: [
+        { icone: '⚠️', tom: 'rosa', nome: 'Frango e derivados', det: 'Confirmado por exame' },
+        { icone: '⚠️', tom: 'roxo', nome: 'Antipulgas com fipronil', det: 'Reação em 2024' }
+      ]}
+    ];
 
     var MS_DIGITA = 45;
     var MS_APAGA = 25;
     var MS_PAUSA = 1400;
     var MS_TROCA = 300;
 
-    if (reduz.matches || falas.length === 0) {
-      /* sem animação: mostra a primeira fala parada */
-      saida.textContent = falas[0] || '';
-    } else {
-      var atual = 0;
-      var letras = 0;
-      var apagando = false;
+    function marcar(i) {
+      Array.prototype.forEach.call(pontos, function (ponto, j) {
+        ponto.classList.toggle('on', j === i);
+      });
+    }
 
+    function pintar(i) {
+      var c = CENAS[i];
+      if (!c) { return; }
+      rotulo.textContent = c.rotulo;
+      entradas.textContent = '';
+      c.itens.forEach(function (item) {
+        var linha = document.createElement('div');
+        linha.className = 'cena-entrada';
+
+        var icone = document.createElement('span');
+        icone.className = 'cena-ic cena-ic--' + item.tom;
+        icone.textContent = item.icone;
+
+        var texto = document.createElement('span');
+        texto.className = 'cena-txt';
+
+        var nome = document.createElement('span');
+        nome.className = 'cena-nome';
+        nome.textContent = item.nome;
+
+        var det = document.createElement('span');
+        det.className = 'cena-det';
+        det.textContent = item.det;
+
+        texto.appendChild(nome);
+        texto.appendChild(det);
+        linha.appendChild(icone);
+        linha.appendChild(texto);
+        entradas.appendChild(linha);
+      });
+    }
+
+    var atual = 0;
+    var letras = 0;
+    var apagando = false;
+
+    /* Reserva a altura da tela pela cena mais alta, medida de verdade: a
+       quebra de linha depende da largura e da fonte, então um número fixo
+       erraria em alguma tela. */
+    function reservarAltura() {
+      corpo.style.minHeight = '';
+      var maior = 0;
+      CENAS.forEach(function (_, i) {
+        pintar(i);
+        maior = Math.max(maior, corpo.getBoundingClientRect().height);
+      });
+      corpo.style.minHeight = Math.ceil(maior) + 'px';
+      pintar(atual);
+    }
+
+    reservarAltura();
+
+    /* As fontes embutidas só ficam prontas depois do primeiro layout. Sem
+       remedir aqui, a reserva fica com a altura da fonte de fallback, que é
+       mais larga e quebra uma linha a mais. */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(reservarAltura);
+    }
+
+    var esperaResize;
+    window.addEventListener('resize', function () {
+      window.clearTimeout(esperaResize);
+      esperaResize = window.setTimeout(reservarAltura, 150);
+    });
+
+    if (reduz.matches || falas.length === 0) {
+      /* sem animação: primeira pergunta e a tela correspondente, paradas */
+      saida.textContent = falas[0] || '';
+      marcar(0);
+    } else {
       (function ciclo() {
         var fala = falas[atual];
 
@@ -1130,8 +1309,18 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         letras -= 1;
         saida.textContent = fala.slice(0, letras);
         if (letras > 0) { return window.setTimeout(ciclo, MS_APAGA); }
+
+        /* pergunta apagada: a tela do app some, troca de conteúdo e volta,
+           enquanto a próxima pergunta começa a ser digitada */
         apagando = false;
         atual = (atual + 1) % falas.length;
+        marcar(atual);
+        corpo.classList.add('trocando');
+        window.setTimeout(function () {
+          pintar(atual);
+          corpo.classList.remove('trocando');
+        }, MS_TROCA);
+
         return window.setTimeout(ciclo, MS_TROCA);
       }());
     }
