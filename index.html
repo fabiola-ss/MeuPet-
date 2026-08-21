@@ -153,6 +153,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 }
 .rotulo--roxo{color:var(--badge-roxo-txt)}
 .rotulo--laranja{color:var(--badge-laranja-txt)}
+.rotulo--solucao{color:#C2542F}
 .rotulo--claro{color:rgba(255,255,255,.78)}
 
 /* ------------------------------------------------------------- 4. Marca */
@@ -336,8 +337,24 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 /* --------------------------------------- 11. Solução (texto + mockup solto) */
 .solucao-grid{display:grid;gap:var(--s6);align-items:center}
 @media (min-width:900px){.solucao-grid{grid-template-columns:1.1fr .9fr}}
-.mockup{display:flex;justify-content:center}
+.mockup{position:relative;display:flex;justify-content:center}
 .mockup img{width:min(100%,300px);filter:drop-shadow(0 24px 44px rgba(36,20,66,.20))}
+/* selo flutuante, metade dentro e metade fora da base do mockup */
+.selo-pets{
+  /* left/right 0 + margem automática em vez de left:50%, senão a largura
+     disponível fica limitada a metade do container e o texto quebra demais */
+  position:absolute;left:0;right:0;bottom:0;
+  width:fit-content;margin-inline:auto;transform:translateY(50%);
+  display:flex;align-items:center;justify-content:center;gap:var(--s2);
+  max-width:90%;margin:0;text-align:center;
+  background:var(--branco);border-radius:var(--r-pill);padding:10px 18px;
+  box-shadow:0 8px 22px rgba(36,20,66,.18);
+  color:var(--navy);font-weight:700;font-size:13px;line-height:1.35;
+}
+.selo-pets-bichos{flex:none;font-size:15px;letter-spacing:1px}
+/* 48px medidos a partir do mockup: o selo avança 20-28px para fora dele,
+   então a folga real até esta linha fica em 20-28px em todas as larguras */
+.nota-pets{margin:48px 0 0;text-align:center;font-size:13px;line-height:1.5;opacity:.85}
 
 /* ----------------------------------------- 12. Features (carrossel lateral) */
 .carrossel-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s5)}
@@ -712,12 +729,19 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   <div class="container">
     <div class="solucao-grid">
       <div class="rv">
-        <span class="rotulo rotulo--laranja">A virada</span>
+        <span class="rotulo rotulo--solucao">A solução</span>
         <h2 id="solucao-titulo">O Meu Pet+ vira a memória que você não precisa mais carregar sozinha.</h2>
         <p class="lead">Não é agenda, nem pasta de fotos: é o histórico de saúde completo do seu pet, sempre à mão, pronto pra qualquer pergunta que surgir.</p>
       </div>
-      <div class="mockup rv" style="--d:.12s">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NjAgNjIwIiB3aWR0aD0iNDYwIiBoZWlnaHQ9IjYyMCIgcm9sZT0iaW1nIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaGciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjRUMxMzYxIi8+PHN0b3Agb2Zmc2V0PSIwLjU1IiBzdG9wLWNvbG9yPSIjOUIyRkM5Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRkY2QjM1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJjdGEiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjRkY4QTNEIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRkY0RDREIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGNsaXBQYXRoIGlkPSJzY3JlZW4iPjxyZWN0IHg9IjI2IiB5PSIyNiIgd2lkdGg9IjQwOCIgaGVpZ2h0PSI1NjgiIHJ4PSIzOCIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgoKICA8IS0tIGNvcnBvIGRvIGFwYXJlbGhvIC0tPgogIDxyZWN0IHg9IjEwIiB5PSIxMCIgd2lkdGg9IjQ0MCIgaGVpZ2h0PSI2MDAiIHJ4PSI1MiIgZmlsbD0iIzI0MTQ0MiIvPgogIDxyZWN0IHg9IjI2IiB5PSIyNiIgd2lkdGg9IjQwOCIgaGVpZ2h0PSI1NjgiIHJ4PSIzOCIgZmlsbD0iI0ZERjZFRSIvPgoKICA8ZyBjbGlwLXBhdGg9InVybCgjc2NyZWVuKSI+CiAgICA8IS0tIHRvcG8gZG8gYXBwIC0tPgogICAgPHJlY3QgeD0iMjYiIHk9IjI2IiB3aWR0aD0iNDA4IiBoZWlnaHQ9IjE1MCIgZmlsbD0idXJsKCNoZykiLz4KICAgIDxyZWN0IHg9IjE5NiIgeT0iNDIiIHdpZHRoPSI2OCIgaGVpZ2h0PSI3IiByeD0iMy41IiBmaWxsPSIjRkZGRkZGIiBvcGFjaXR5PSIwLjU1Ii8+CgogICAgPGNpcmNsZSBjeD0iODYiIGN5PSIxMTIiIHI9IjMwIiBmaWxsPSIjRkZGRkZGIiBvcGFjaXR5PSIwLjkyIi8+CiAgICA8IS0tIHBhdGluaGEgbm8gYXZhdGFyIC0tPgogICAgPGVsbGlwc2UgY3g9Ijg2IiBjeT0iMTE5IiByeD0iMTIiIHJ5PSIxMCIgZmlsbD0iI0VDMTM2MSIvPgogICAgPGNpcmNsZSBjeD0iNzQiIGN5PSIxMDMiIHI9IjQuNiIgZmlsbD0iI0VDMTM2MSIvPgogICAgPGNpcmNsZSBjeD0iODQiIGN5PSI5OCIgcj0iNC42IiBmaWxsPSIjRUMxMzYxIi8+CiAgICA8Y2lyY2xlIGN4PSI5NSIgY3k9IjEwMCIgcj0iNC42IiBmaWxsPSIjRUMxMzYxIi8+CiAgICA8Y2lyY2xlIGN4PSIxMDIiIGN5PSIxMTAiIHI9IjQuMiIgZmlsbD0iI0VDMTM2MSIvPgoKICAgIDxyZWN0IHg9IjEzMCIgeT0iOTYiIHdpZHRoPSIxNTAiIGhlaWdodD0iMTQiIHJ4PSI3IiBmaWxsPSIjRkZGRkZGIiBvcGFjaXR5PSIwLjk1Ii8+CiAgICA8cmVjdCB4PSIxMzAiIHk9IjEyMCIgd2lkdGg9Ijk2IiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iI0ZGRkZGRiIgb3BhY2l0eT0iMC42Ii8+CgogICAgPCEtLSBzaW5vIGRlIGxlbWJyZXRlIC0tPgogICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzcyLDEwNCkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIyLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgICAgIDxwYXRoIGQ9Ik0tOSAzYTkgOSAwIDAgMSAxOCAwYzAgNSAyIDcgMyA4aC0yNGMxLTEgMy0zIDMtOHoiLz4KICAgICAgPHBhdGggZD0iTS0zIDE1YTMuMiAzLjIgMCAwIDAgNiAwIi8+CiAgICA8L2c+CiAgICA8Y2lyY2xlIGN4PSIzODEiIGN5PSI5NSIgcj0iNiIgZmlsbD0iI0ZGNkIzNSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiLz4KCiAgICA8IS0tIGNhcmQgMTogdmFjaW5hcyAtLT4KICAgIDxyZWN0IHg9IjUyIiB5PSIxOTgiIHdpZHRoPSIzNTYiIGhlaWdodD0iODYiIHJ4PSIyNCIgZmlsbD0iI0ZGRkZGRiIvPgogICAgPGNpcmNsZSBjeD0iOTQiIGN5PSIyNDEiIHI9IjI0IiBmaWxsPSIjRkRFMUVDIi8+CiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NCwyNDEpIiBmaWxsPSJub25lIiBzdHJva2U9IiNFQzEzNjEiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgICA8cGF0aCBkPSJNLTItMTAgOCAwIi8+PHBhdGggZD0iTS05IDkgMy0zbDQgNEwtNSAxM0gtOXoiLz48cGF0aCBkPSJNLTYtMiAyIDYiLz4KICAgIDwvZz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iMjIyIiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjEzIiByeD0iNi41IiBmaWxsPSIjMjQxNDQyIi8+CiAgICA8cmVjdCB4PSIxMzIiIHk9IjI0NSIgd2lkdGg9IjE5MCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiM4QjgzOUEiIG9wYWNpdHk9IjAuNDUiLz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iMjYxIiB3aWR0aD0iODYiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjOEI4MzlBIiBvcGFjaXR5PSIwLjI4Ii8+CgogICAgPCEtLSBjYXJkIDI6IG1lZGljYW1lbnRvcyAtLT4KICAgIDxyZWN0IHg9IjUyIiB5PSIyOTgiIHdpZHRoPSIzNTYiIGhlaWdodD0iODYiIHJ4PSIyNCIgZmlsbD0iI0ZGRkZGRiIvPgogICAgPGNpcmNsZSBjeD0iOTQiIGN5PSIzNDEiIHI9IjI0IiBmaWxsPSIjRkZFOEQ5Ii8+CiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NCwzNDEpIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRjZCMzUiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgICA8cmVjdCB4PSItMTEiIHk9Ii02IiB3aWR0aD0iMjIiIGhlaWdodD0iMTIiIHJ4PSI2Ii8+PHBhdGggZD0iTTAtNnYxMiIvPgogICAgPC9nPgogICAgPHJlY3QgeD0iMTMyIiB5PSIzMjIiIHdpZHRoPSIxNDAiIGhlaWdodD0iMTMiIHJ4PSI2LjUiIGZpbGw9IiMyNDE0NDIiLz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iMzQ1IiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iIzhCODM5QSIgb3BhY2l0eT0iMC40NSIvPgogICAgPHJlY3QgeD0iMTMyIiB5PSIzNjEiIHdpZHRoPSIxMDQiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjOEI4MzlBIiBvcGFjaXR5PSIwLjI4Ii8+CgogICAgPCEtLSBjYXJkIDM6IGV4YW1lcyAtLT4KICAgIDxyZWN0IHg9IjUyIiB5PSIzOTgiIHdpZHRoPSIzNTYiIGhlaWdodD0iODYiIHJ4PSIyNCIgZmlsbD0iI0ZGRkZGRiIvPgogICAgPGNpcmNsZSBjeD0iOTQiIGN5PSI0NDEiIHI9IjI0IiBmaWxsPSIjRjFFM0ZBIi8+CiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NCw0NDEpIiBmaWxsPSJub25lIiBzdHJva2U9IiM5QjJGQzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgICA8cGF0aCBkPSJNLTQtMTF2OGwtNiAxMGEzIDMgMCAwIDAgMyA1aDE0YTMgMyAwIDAgMCAzLTVsLTYtMTB2LTgiLz48cGF0aCBkPSJNLTYtMTFoMTIiLz4KICAgIDwvZz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iNDIyIiB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEzIiByeD0iNi41IiBmaWxsPSIjMjQxNDQyIi8+CiAgICA8cmVjdCB4PSIxMzIiIHk9IjQ0NSIgd2lkdGg9IjE4NCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiM4QjgzOUEiIG9wYWNpdHk9IjAuNDUiLz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iNDYxIiB3aWR0aD0iNzIiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjOEI4MzlBIiBvcGFjaXR5PSIwLjI4Ii8+CgogICAgPCEtLSBib3TDo28gU09TIC0tPgogICAgPHJlY3QgeD0iOTYiIHk9IjUxMiIgd2lkdGg9IjI2OCIgaGVpZ2h0PSI1NiIgcng9IjI4IiBmaWxsPSJ1cmwoI2N0YSkiLz4KICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE1MCw1NDApIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgICA8cGF0aCBkPSJNMC0xMSAxMiA4YTIuNiAyLjYgMCAwIDEtMi4yIDRILTkuOEEyLjYgMi42IDAgMCAxLTEyIDh6Ii8+PHBhdGggZD0iTTAtM3Y2Ii8+PHBhdGggZD0iTTAgOGgwLjAxIi8+CiAgICA8L2c+CiAgICA8cmVjdCB4PSIxODAiIHk9IjUzMyIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIxNCIgcng9IjciIGZpbGw9IiNGRkZGRkYiIG9wYWNpdHk9IjAuOTUiLz4KICA8L2c+Cjwvc3ZnPgo=" width="460" height="620" alt="Tela do aplicativo Meu Pet+ com os registros de vacinas, medicamentos e exames do pet e o botão de Modo SOS." loading="lazy" decoding="async">
+      <div class="rv" style="--d:.12s">
+        <div class="mockup">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NjAgNjIwIiB3aWR0aD0iNDYwIiBoZWlnaHQ9IjYyMCIgcm9sZT0iaW1nIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaGciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjRUMxMzYxIi8+PHN0b3Agb2Zmc2V0PSIwLjU1IiBzdG9wLWNvbG9yPSIjOUIyRkM5Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRkY2QjM1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJjdGEiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjRkY4QTNEIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRkY0RDREIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGNsaXBQYXRoIGlkPSJzY3JlZW4iPjxyZWN0IHg9IjI2IiB5PSIyNiIgd2lkdGg9IjQwOCIgaGVpZ2h0PSI1NjgiIHJ4PSIzOCIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgoKICA8IS0tIGNvcnBvIGRvIGFwYXJlbGhvIC0tPgogIDxyZWN0IHg9IjEwIiB5PSIxMCIgd2lkdGg9IjQ0MCIgaGVpZ2h0PSI2MDAiIHJ4PSI1MiIgZmlsbD0iIzI0MTQ0MiIvPgogIDxyZWN0IHg9IjI2IiB5PSIyNiIgd2lkdGg9IjQwOCIgaGVpZ2h0PSI1NjgiIHJ4PSIzOCIgZmlsbD0iI0ZERjZFRSIvPgoKICA8ZyBjbGlwLXBhdGg9InVybCgjc2NyZWVuKSI+CiAgICA8IS0tIHRvcG8gZG8gYXBwIC0tPgogICAgPHJlY3QgeD0iMjYiIHk9IjI2IiB3aWR0aD0iNDA4IiBoZWlnaHQ9IjE1MCIgZmlsbD0idXJsKCNoZykiLz4KICAgIDxyZWN0IHg9IjE5NiIgeT0iNDIiIHdpZHRoPSI2OCIgaGVpZ2h0PSI3IiByeD0iMy41IiBmaWxsPSIjRkZGRkZGIiBvcGFjaXR5PSIwLjU1Ii8+CgogICAgPGNpcmNsZSBjeD0iODYiIGN5PSIxMTIiIHI9IjMwIiBmaWxsPSIjRkZGRkZGIiBvcGFjaXR5PSIwLjkyIi8+CiAgICA8IS0tIHBhdGluaGEgbm8gYXZhdGFyIC0tPgogICAgPGVsbGlwc2UgY3g9Ijg2IiBjeT0iMTE5IiByeD0iMTIiIHJ5PSIxMCIgZmlsbD0iI0VDMTM2MSIvPgogICAgPGNpcmNsZSBjeD0iNzQiIGN5PSIxMDMiIHI9IjQuNiIgZmlsbD0iI0VDMTM2MSIvPgogICAgPGNpcmNsZSBjeD0iODQiIGN5PSI5OCIgcj0iNC42IiBmaWxsPSIjRUMxMzYxIi8+CiAgICA8Y2lyY2xlIGN4PSI5NSIgY3k9IjEwMCIgcj0iNC42IiBmaWxsPSIjRUMxMzYxIi8+CiAgICA8Y2lyY2xlIGN4PSIxMDIiIGN5PSIxMTAiIHI9IjQuMiIgZmlsbD0iI0VDMTM2MSIvPgoKICAgIDxyZWN0IHg9IjEzMCIgeT0iOTYiIHdpZHRoPSIxNTAiIGhlaWdodD0iMTQiIHJ4PSI3IiBmaWxsPSIjRkZGRkZGIiBvcGFjaXR5PSIwLjk1Ii8+CiAgICA8cmVjdCB4PSIxMzAiIHk9IjEyMCIgd2lkdGg9Ijk2IiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iI0ZGRkZGRiIgb3BhY2l0eT0iMC42Ii8+CgogICAgPCEtLSBzaW5vIGRlIGxlbWJyZXRlIC0tPgogICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzcyLDEwNCkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIyLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgICAgIDxwYXRoIGQ9Ik0tOSAzYTkgOSAwIDAgMSAxOCAwYzAgNSAyIDcgMyA4aC0yNGMxLTEgMy0zIDMtOHoiLz4KICAgICAgPHBhdGggZD0iTS0zIDE1YTMuMiAzLjIgMCAwIDAgNiAwIi8+CiAgICA8L2c+CiAgICA8Y2lyY2xlIGN4PSIzODEiIGN5PSI5NSIgcj0iNiIgZmlsbD0iI0ZGNkIzNSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiLz4KCiAgICA8IS0tIGNhcmQgMTogdmFjaW5hcyAtLT4KICAgIDxyZWN0IHg9IjUyIiB5PSIxOTgiIHdpZHRoPSIzNTYiIGhlaWdodD0iODYiIHJ4PSIyNCIgZmlsbD0iI0ZGRkZGRiIvPgogICAgPGNpcmNsZSBjeD0iOTQiIGN5PSIyNDEiIHI9IjI0IiBmaWxsPSIjRkRFMUVDIi8+CiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NCwyNDEpIiBmaWxsPSJub25lIiBzdHJva2U9IiNFQzEzNjEiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgICA8cGF0aCBkPSJNLTItMTAgOCAwIi8+PHBhdGggZD0iTS05IDkgMy0zbDQgNEwtNSAxM0gtOXoiLz48cGF0aCBkPSJNLTYtMiAyIDYiLz4KICAgIDwvZz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iMjIyIiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjEzIiByeD0iNi41IiBmaWxsPSIjMjQxNDQyIi8+CiAgICA8cmVjdCB4PSIxMzIiIHk9IjI0NSIgd2lkdGg9IjE5MCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiM4QjgzOUEiIG9wYWNpdHk9IjAuNDUiLz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iMjYxIiB3aWR0aD0iODYiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjOEI4MzlBIiBvcGFjaXR5PSIwLjI4Ii8+CgogICAgPCEtLSBjYXJkIDI6IG1lZGljYW1lbnRvcyAtLT4KICAgIDxyZWN0IHg9IjUyIiB5PSIyOTgiIHdpZHRoPSIzNTYiIGhlaWdodD0iODYiIHJ4PSIyNCIgZmlsbD0iI0ZGRkZGRiIvPgogICAgPGNpcmNsZSBjeD0iOTQiIGN5PSIzNDEiIHI9IjI0IiBmaWxsPSIjRkZFOEQ5Ii8+CiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NCwzNDEpIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRjZCMzUiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgICA8cmVjdCB4PSItMTEiIHk9Ii02IiB3aWR0aD0iMjIiIGhlaWdodD0iMTIiIHJ4PSI2Ii8+PHBhdGggZD0iTTAtNnYxMiIvPgogICAgPC9nPgogICAgPHJlY3QgeD0iMTMyIiB5PSIzMjIiIHdpZHRoPSIxNDAiIGhlaWdodD0iMTMiIHJ4PSI2LjUiIGZpbGw9IiMyNDE0NDIiLz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iMzQ1IiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iIzhCODM5QSIgb3BhY2l0eT0iMC40NSIvPgogICAgPHJlY3QgeD0iMTMyIiB5PSIzNjEiIHdpZHRoPSIxMDQiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjOEI4MzlBIiBvcGFjaXR5PSIwLjI4Ii8+CgogICAgPCEtLSBjYXJkIDM6IGV4YW1lcyAtLT4KICAgIDxyZWN0IHg9IjUyIiB5PSIzOTgiIHdpZHRoPSIzNTYiIGhlaWdodD0iODYiIHJ4PSIyNCIgZmlsbD0iI0ZGRkZGRiIvPgogICAgPGNpcmNsZSBjeD0iOTQiIGN5PSI0NDEiIHI9IjI0IiBmaWxsPSIjRjFFM0ZBIi8+CiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NCw0NDEpIiBmaWxsPSJub25lIiBzdHJva2U9IiM5QjJGQzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgICA8cGF0aCBkPSJNLTQtMTF2OGwtNiAxMGEzIDMgMCAwIDAgMyA1aDE0YTMgMyAwIDAgMCAzLTVsLTYtMTB2LTgiLz48cGF0aCBkPSJNLTYtMTFoMTIiLz4KICAgIDwvZz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iNDIyIiB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEzIiByeD0iNi41IiBmaWxsPSIjMjQxNDQyIi8+CiAgICA8cmVjdCB4PSIxMzIiIHk9IjQ0NSIgd2lkdGg9IjE4NCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiM4QjgzOUEiIG9wYWNpdHk9IjAuNDUiLz4KICAgIDxyZWN0IHg9IjEzMiIgeT0iNDYxIiB3aWR0aD0iNzIiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjOEI4MzlBIiBvcGFjaXR5PSIwLjI4Ii8+CgogICAgPCEtLSBib3TDo28gU09TIC0tPgogICAgPHJlY3QgeD0iOTYiIHk9IjUxMiIgd2lkdGg9IjI2OCIgaGVpZ2h0PSI1NiIgcng9IjI4IiBmaWxsPSJ1cmwoI2N0YSkiLz4KICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE1MCw1NDApIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogICAgICA8cGF0aCBkPSJNMC0xMSAxMiA4YTIuNiAyLjYgMCAwIDEtMi4yIDRILTkuOEEyLjYgMi42IDAgMCAxLTEyIDh6Ii8+PHBhdGggZD0iTTAtM3Y2Ii8+PHBhdGggZD0iTTAgOGgwLjAxIi8+CiAgICA8L2c+CiAgICA8cmVjdCB4PSIxODAiIHk9IjUzMyIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIxNCIgcng9IjciIGZpbGw9IiNGRkZGRkYiIG9wYWNpdHk9IjAuOTUiLz4KICA8L2c+Cjwvc3ZnPgo=" width="460" height="620" alt="Tela do aplicativo Meu Pet+ com os registros de vacinas, medicamentos e exames do pet e o botão de Modo SOS." loading="lazy" decoding="async">
+          <p class="selo-pets">
+            <span class="selo-pets-bichos" aria-hidden="true">🐶🐱🐰</span>
+            Quantos pets você quiser, numa conta só
+          </p>
+        </div>
+        <p class="nota-pets">Sem pagar assinatura separada pra cada pet.</p>
       </div>
     </div>
   </div>
@@ -807,27 +831,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </div>
 </section>
 
-<!-- ============================ 6. MULTI-PET — creme, com blob =========== -->
-<section class="section bg-creme" id="multipet" aria-labelledby="multipet-titulo">
-  <div class="container">
-    <div class="duas-colunas">
-      <div class="col-copy rv">
-        <span class="rotulo">Diferencial</span>
-        <h2 id="multipet-titulo">Tem mais de um pet? Um app cuida de todos.</h2>
-        <p>Cadastre quantos pets quiser numa única conta — cachorro, gato, coelho, hamster, passarinho ou qualquer outro companheiro da família.</p>
-        <p><strong>Um aplicativo. Todos os seus pets.</strong> Sem pagar uma assinatura separada pra cada um.</p>
-      </div>
-      <div class="col-media rv" style="--d:.12s">
-        <img class="blob" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0ODAgNDgwIiB3aWR0aD0iNDgwIiBoZWlnaHQ9IjQ4MCIgcm9sZT0iaW1nIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmxvYiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNGREUxRUMiLz48c3RvcCBvZmZzZXQ9IjAuNSIgc3RvcC1jb2xvcj0iI0YxRTNGQSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0ZGRThEOSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQ4MCIgaGVpZ2h0PSI0ODAiIGZpbGw9IiNGREY2RUUiLz4KICA8cGF0aCBkPSJNMjQ2IDM0Yzg2LTYgMTU2IDQyIDE4NiAxMTYgMzAgNzQgMTIgMTU0LTQ0IDIwMi01NiA0OC0xNDAgNjItMjA2IDMyQzExNiAzNTQgNjYgMjkyIDYwIDIxOCA1NCAxNDQgOTYgNzYgMTYwIDUwYzI4LTExIDU4LTE0IDg2LTE2eiIgZmlsbD0idXJsKCNibG9iKSIvPgoKICA8IS0tIGNhY2hvcnJvIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE1NCwxNzgpIj4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSI3MCIgZmlsbD0iI0ZGRkZGRiIvPgogICAgPHBhdGggZD0iTS00NC0zOGMtOSAzLTEzIDIwLTEwIDM4IDMgMTUgOSAyNCAxNiAyNiA2IDEgMTAtNyA5LTE4LTEtMTctMy0zNC01LTQxLTEtNC01LTctMTAtNXoiIGZpbGw9IiNCOTcwMkYiLz4KICAgIDxwYXRoIGQ9Ik00NC0zOGM5IDMgMTMgMjAgMTAgMzgtMyAxNS05IDI0LTE2IDI2LTYgMS0xMC03LTktMTggMS0xNyAzLTM0IDUtNDEgMS00IDUtNyAxMC01eiIgZmlsbD0iI0I5NzAyRiIvPgogICAgPHBhdGggZD0iTTAtMzJjMjQgMCA0MSAxNSA0MyA0MCAyIDIyLTExIDQ1LTQzIDQ1cy00NS0yMy00My00NWMyLTI1IDE5LTQwIDQzLTQweiIgZmlsbD0iI0YwQTg1RSIvPgogICAgPGVsbGlwc2UgY3g9Ii0xNiIgY3k9IjgiIHJ4PSI2IiByeT0iNyIgZmlsbD0iIzI0MTQ0MiIvPgogICAgPGVsbGlwc2UgY3g9IjE2IiBjeT0iOCIgcng9IjYiIHJ5PSI3IiBmaWxsPSIjMjQxNDQyIi8+CiAgICA8ZWxsaXBzZSBjeD0iMCIgY3k9IjI4IiByeD0iMTgiIHJ5PSIxMyIgZmlsbD0iI0ZGRkZGRiIgb3BhY2l0eT0iMC42Ii8+CiAgICA8cGF0aCBkPSJNMCAyMGM1IDAgOSAzIDkgNnMtNCA1LTkgNS05LTItOS01IDQtNiA5LTZ6IiBmaWxsPSIjMjQxNDQyIi8+CiAgICA8cGF0aCBkPSJNMCAzMXY2IiBzdHJva2U9IiMyNDE0NDIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNMCAzN2MwIDUtNCA3LTggN3MtNy0yLTctNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQxNDQyIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTAgMzdjMCA1IDQgNyA4IDdzNy0yIDctNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQxNDQyIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwvZz4KCiAgPCEtLSBnYXRvIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMCwxNjgpIj4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSI2MiIgZmlsbD0iI0ZGRkZGRiIvPgogICAgPHBhdGggZD0iTS00MC00MCAtMzAtMmwtMTQtNnoiIGZpbGw9IiM4QzdGQTgiLz4KICAgIDxwYXRoIGQ9Ik00MC00MCAzMC0ybDE0LTZ6IiBmaWxsPSIjOEM3RkE4Ii8+CiAgICA8cGF0aCBkPSJNLTM4LTM4IC0zMC0xMGwtOS00eiIgZmlsbD0iI0Y3QzdEOSIvPgogICAgPHBhdGggZD0iTTM4LTM4IDMwLTEwbDktNHoiIGZpbGw9IiNGN0M3RDkiLz4KICAgIDxwYXRoIGQ9Ik0wLTI2YzIyIDAgMzggMTQgMzggMzQgMCAyMi0xNyAzNi0zOCAzNnMtMzgtMTQtMzgtMzZjMC0yMCAxNi0zNCAzOC0zNHoiIGZpbGw9IiM4QzdGQTgiLz4KICAgIDxlbGxpcHNlIGN4PSItMTQiIGN5PSI2IiByeD0iNS41IiByeT0iNyIgZmlsbD0iIzI0MTQ0MiIvPgogICAgPGVsbGlwc2UgY3g9IjE0IiBjeT0iNiIgcng9IjUuNSIgcnk9IjciIGZpbGw9IiMyNDE0NDIiLz4KICAgIDxwYXRoIGQ9Ik0wIDIwYzQgMCA3IDIgNyA0cy0zIDQtNyA0LTctMi03LTQgMy00IDctNHoiIGZpbGw9IiNFQzEzNjEiLz4KICAgIDxwYXRoIGQ9Ik0wIDI4djUiIHN0cm9rZT0iIzI0MTQ0MiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTAgMzNjMCA0LTMgNi02IDZzLTYtMi02LTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI0MTQ0MiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTAgMzNjMCA0IDMgNiA2IDZzNi0yIDYtNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQxNDQyIiBzdHJva2Utd2lkdGg9IjIuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8ZyBzdHJva2U9IiMyNDE0NDIiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNyI+CiAgICAgIDxwYXRoIGQ9Ik0tMjQgMTZoLTIwIi8+PHBhdGggZD0iTS0yNCAyNGwtMTkgNyIvPjxwYXRoIGQ9Ik0yNCAxNmgyMCIvPjxwYXRoIGQ9Ik0yNCAyNGwxOSA3Ii8+CiAgICA8L2c+CiAgPC9nPgoKICA8IS0tIGNvZWxobyAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMzYsMzM4KSI+CiAgICA8Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iNjYiIGZpbGw9IiNGRkZGRkYiLz4KICAgIDxlbGxpcHNlIGN4PSItMjAiIGN5PSItNTIiIHJ4PSIxMiIgcnk9IjM0IiBmaWxsPSIjRTdEQ0VGIi8+CiAgICA8ZWxsaXBzZSBjeD0iMjAiIGN5PSItNTIiIHJ4PSIxMiIgcnk9IjM0IiBmaWxsPSIjRTdEQ0VGIi8+CiAgICA8ZWxsaXBzZSBjeD0iLTIwIiBjeT0iLTUyIiByeD0iNiIgcnk9IjI0IiBmaWxsPSIjRjdDN0Q5Ii8+CiAgICA8ZWxsaXBzZSBjeD0iMjAiIGN5PSItNTIiIHJ4PSI2IiByeT0iMjQiIGZpbGw9IiNGN0M3RDkiLz4KICAgIDxwYXRoIGQ9Ik0wLTIyYzIzIDAgNDAgMTUgNDAgMzUgMCAyMS0xOCAzMy00MCAzM3MtNDAtMTItNDAtMzNjMC0yMCAxNy0zNSA0MC0zNXoiIGZpbGw9IiNFN0RDRUYiLz4KICAgIDxlbGxpcHNlIGN4PSItMTUiIGN5PSI2IiByeD0iNS41IiByeT0iNyIgZmlsbD0iIzI0MTQ0MiIvPgogICAgPGVsbGlwc2UgY3g9IjE1IiBjeT0iNiIgcng9IjUuNSIgcnk9IjciIGZpbGw9IiMyNDE0NDIiLz4KICAgIDxwYXRoIGQ9Ik0wIDIwYzQgMCA3IDIgNyA0cy0zIDQtNyA0LTctMi03LTQgMy00IDctNHoiIGZpbGw9IiNFQzEzNjEiLz4KICAgIDxwYXRoIGQ9Ik0wIDI4djUiIHN0cm9rZT0iIzI0MTQ0MiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTAgMzNjMCA0LTMgNi02IDZzLTYtMi02LTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI0MTQ0MiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTAgMzNjMCA0IDMgNiA2IDZzNi0yIDYtNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQxNDQyIiBzdHJva2Utd2lkdGg9IjIuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8ZWxsaXBzZSBjeD0iLTI2IiBjeT0iMTgiIHJ4PSI5IiByeT0iNiIgZmlsbD0iI0VDMTM2MSIgb3BhY2l0eT0iMC4xOCIvPgogICAgPGVsbGlwc2UgY3g9IjI2IiBjeT0iMTgiIHJ4PSI5IiByeT0iNiIgZmlsbD0iI0VDMTM2MSIgb3BhY2l0eT0iMC4xOCIvPgogIDwvZz4KCiAgPCEtLSBwYXNzYXJpbmhvIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2NCwzMTIpIj4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSI0MCIgZmlsbD0iI0ZGRkZGRiIvPgogICAgPHBhdGggZD0iTS0yLTI0YzE2IDAgMjYgMTIgMjYgMjYgMCAxMi0xMSAyMi0yNiAyMnMtMjQtMTAtMjQtMjJjMC0xNCA4LTI2IDI0LTI2eiIgZmlsbD0iI0YwQTg1RSIvPgogICAgPHBhdGggZD0iTS00LTRjMTAgMCAxNyA2IDE3IDEzUzYgMjItNCAyMi0yMCAxNi0yMCA5LTE0LTQtNC00eiIgZmlsbD0iI0ZGRDc5QiIvPgogICAgPGNpcmNsZSBjeD0iNiIgY3k9Ii04IiByPSI0LjQiIGZpbGw9IiMyNDE0NDIiLz4KICAgIDxwYXRoIGQ9Ik0yMi02bDEyIDUtMTIgNXoiIGZpbGw9IiNGRjZCMzUiLz4KICAgIDxwYXRoIGQ9Ik0tMjQgMjJjLTYgNi0xNCA4LTIyIDYgNi0yIDEwLTYgMTItMTJ6IiBmaWxsPSIjRjBBODVFIi8+CiAgPC9nPgoKICA8IS0tIGhhbXN0ZXIgLS0+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIwLDMyNikiPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjQyIiBmaWxsPSIjRkZGRkZGIi8+CiAgICA8Y2lyY2xlIGN4PSItMTkiIGN5PSItMjIiIHI9IjkiIGZpbGw9IiNEOUEwNUIiLz4KICAgIDxjaXJjbGUgY3g9IjE5IiBjeT0iLTIyIiByPSI5IiBmaWxsPSIjRDlBMDVCIi8+CiAgICA8cGF0aCBkPSJNMC0yMGMxNyAwIDI4IDExIDI4IDI0IDAgMTQtMTIgMjItMjggMjJzLTI4LTgtMjgtMjJjMC0xMyAxMS0yNCAyOC0yNHoiIGZpbGw9IiNFRkM1OEEiLz4KICAgIDxjaXJjbGUgY3g9Ii0xMCIgY3k9IjYiIHI9IjQuNCIgZmlsbD0iIzI0MTQ0MiIvPgogICAgPGNpcmNsZSBjeD0iMTAiIGN5PSI2IiByPSI0LjQiIGZpbGw9IiMyNDE0NDIiLz4KICAgIDxwYXRoIGQ9Ik0wIDE2YzMgMCA1IDIgNSAzLjVTMyAyMyAwIDIzcy01LTItNS0zLjVTLTMgMTYgMCAxNnoiIGZpbGw9IiNFQzEzNjEiLz4KICAgIDxlbGxpcHNlIGN4PSItMjAiIGN5PSIxNiIgcng9IjciIHJ5PSI1IiBmaWxsPSIjRUMxMzYxIiBvcGFjaXR5PSIwLjE4Ii8+CiAgICA8ZWxsaXBzZSBjeD0iMjAiIGN5PSIxNiIgcng9IjciIHJ5PSI1IiBmaWxsPSIjRUMxMzYxIiBvcGFjaXR5PSIwLjE4Ii8+CiAgPC9nPgo8L3N2Zz4K" width="480" height="480" alt="Ilustração com um cachorro, um gato, um coelho, um passarinho e um hamster reunidos, representando vários pets numa mesma conta." loading="lazy" decoding="async">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 7. MODO SOS — bloco sólido escuro, foto em blob ========== -->
+<!-- ============ 6. MODO SOS — bloco sólido escuro, foto em blob ========== -->
 <section class="section solida sos com-borda-topo com-borda-base" id="modo-sos" aria-labelledby="sos-titulo">
   <svg class="borda borda--topo" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <path d="M0 0v34c180 28 360-22 600-4 240 18 420-22 600-4V0Z" fill="#FDF6EE"/>
+    <path d="M0 0v34c180 28 360-22 600-4 240 18 420-22 600-4V0Z" fill="#F5EEE3"/>
   </svg>
 
   <div class="container">
@@ -852,7 +859,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </svg>
 </section>
 
-<!-- ====================== 8. COMO FUNCIONA — creme, timeline ============= -->
+<!-- ====================== 7. COMO FUNCIONA — creme, timeline ============= -->
 <section class="section bg-creme" id="como-funciona" aria-labelledby="como-funciona-titulo">
   <div class="container">
     <div class="head head--center rv">
@@ -885,7 +892,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </div>
 </section>
 
-<!-- =============== 9. OFERTA — bloco sólido (laranja-coral) ============== -->
+<!-- =============== 8. OFERTA — bloco sólido (laranja-coral) ============== -->
 <section class="section section--ancora solida oferta com-borda-topo com-borda-base" id="oferta" aria-labelledby="oferta-titulo">
   <svg class="borda borda--topo" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
     <path d="M0 0v30c220 30 400-24 620-6 220 18 400-20 580 2V0Z" fill="#FDF6EE"/>
@@ -932,7 +939,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </svg>
 </section>
 
-<!-- ================================ 10. GARANTIA — creme-alt ============= -->
+<!-- ================================ 9. GARANTIA — creme-alt ============= -->
 <section class="section bg-alt" id="garantia" aria-labelledby="garantia-titulo">
   <div class="container">
     <div class="head rv">
@@ -959,7 +966,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </div>
 </section>
 
-<!-- ======================================= 11. FAQ — creme =============== -->
+<!-- ======================================= 10. FAQ — creme =============== -->
 <section class="section bg-creme" id="faq" aria-labelledby="faq-titulo">
   <div class="container">
     <div class="head head--center rv">
@@ -1004,7 +1011,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </div>
 </section>
 
-<!-- ================================= 12. CTA FINAL — creme ============== -->
+<!-- ================================= 11. CTA FINAL — creme ============== -->
 <section class="section section--ancora bg-creme final" id="cta-final" aria-labelledby="cta-final-titulo">
   <div class="container">
     <div class="rv">

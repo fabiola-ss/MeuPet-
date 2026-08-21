@@ -35,7 +35,6 @@ ALVOS = [
     ("__FOTO_HERO__",    ["foto-hero", "retrato-pet.svg"],       False),
     ("__FOTO_SOS__",     ["foto-sos", "sos-pet.svg"],            False),
     ("__IMG_APP__",      ["hero-app.svg"],                       False),
-    ("__IMG_MULTIPET__", ["multipet.svg"],                       False),
 ]
 
 

@@ -153,6 +153,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 }
 .rotulo--roxo{color:var(--badge-roxo-txt)}
 .rotulo--laranja{color:var(--badge-laranja-txt)}
+.rotulo--solucao{color:#C2542F}
 .rotulo--claro{color:rgba(255,255,255,.78)}
 
 /* ------------------------------------------------------------- 4. Marca */
@@ -336,8 +337,24 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 /* --------------------------------------- 11. Solução (texto + mockup solto) */
 .solucao-grid{display:grid;gap:var(--s6);align-items:center}
 @media (min-width:900px){.solucao-grid{grid-template-columns:1.1fr .9fr}}
-.mockup{display:flex;justify-content:center}
+.mockup{position:relative;display:flex;justify-content:center}
 .mockup img{width:min(100%,300px);filter:drop-shadow(0 24px 44px rgba(36,20,66,.20))}
+/* selo flutuante, metade dentro e metade fora da base do mockup */
+.selo-pets{
+  /* left/right 0 + margem automática em vez de left:50%, senão a largura
+     disponível fica limitada a metade do container e o texto quebra demais */
+  position:absolute;left:0;right:0;bottom:0;
+  width:fit-content;margin-inline:auto;transform:translateY(50%);
+  display:flex;align-items:center;justify-content:center;gap:var(--s2);
+  max-width:90%;margin:0;text-align:center;
+  background:var(--branco);border-radius:var(--r-pill);padding:10px 18px;
+  box-shadow:0 8px 22px rgba(36,20,66,.18);
+  color:var(--navy);font-weight:700;font-size:13px;line-height:1.35;
+}
+.selo-pets-bichos{flex:none;font-size:15px;letter-spacing:1px}
+/* 48px medidos a partir do mockup: o selo avança 20-28px para fora dele,
+   então a folga real até esta linha fica em 20-28px em todas as larguras */
+.nota-pets{margin:48px 0 0;text-align:center;font-size:13px;line-height:1.5;opacity:.85}
 
 /* ----------------------------------------- 12. Features (carrossel lateral) */
 .carrossel-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s5)}
@@ -712,12 +729,19 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   <div class="container">
     <div class="solucao-grid">
       <div class="rv">
-        <span class="rotulo rotulo--laranja">A virada</span>
+        <span class="rotulo rotulo--solucao">A solução</span>
         <h2 id="solucao-titulo">O Meu Pet+ vira a memória que você não precisa mais carregar sozinha.</h2>
         <p class="lead">Não é agenda, nem pasta de fotos: é o histórico de saúde completo do seu pet, sempre à mão, pronto pra qualquer pergunta que surgir.</p>
       </div>
-      <div class="mockup rv" style="--d:.12s">
-        <img src="__IMG_APP__" width="460" height="620" alt="Tela do aplicativo Meu Pet+ com os registros de vacinas, medicamentos e exames do pet e o botão de Modo SOS." loading="lazy" decoding="async">
+      <div class="rv" style="--d:.12s">
+        <div class="mockup">
+          <img src="__IMG_APP__" width="460" height="620" alt="Tela do aplicativo Meu Pet+ com os registros de vacinas, medicamentos e exames do pet e o botão de Modo SOS." loading="lazy" decoding="async">
+          <p class="selo-pets">
+            <span class="selo-pets-bichos" aria-hidden="true">🐶🐱🐰</span>
+            Quantos pets você quiser, numa conta só
+          </p>
+        </div>
+        <p class="nota-pets">Sem pagar assinatura separada pra cada pet.</p>
       </div>
     </div>
   </div>
@@ -807,27 +831,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </div>
 </section>
 
-<!-- ============================ 6. MULTI-PET — creme, com blob =========== -->
-<section class="section bg-creme" id="multipet" aria-labelledby="multipet-titulo">
-  <div class="container">
-    <div class="duas-colunas">
-      <div class="col-copy rv">
-        <span class="rotulo">Diferencial</span>
-        <h2 id="multipet-titulo">Tem mais de um pet? Um app cuida de todos.</h2>
-        <p>Cadastre quantos pets quiser numa única conta — cachorro, gato, coelho, hamster, passarinho ou qualquer outro companheiro da família.</p>
-        <p><strong>Um aplicativo. Todos os seus pets.</strong> Sem pagar uma assinatura separada pra cada um.</p>
-      </div>
-      <div class="col-media rv" style="--d:.12s">
-        <img class="blob" src="__IMG_MULTIPET__" width="480" height="480" alt="Ilustração com um cachorro, um gato, um coelho, um passarinho e um hamster reunidos, representando vários pets numa mesma conta." loading="lazy" decoding="async">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 7. MODO SOS — bloco sólido escuro, foto em blob ========== -->
+<!-- ============ 6. MODO SOS — bloco sólido escuro, foto em blob ========== -->
 <section class="section solida sos com-borda-topo com-borda-base" id="modo-sos" aria-labelledby="sos-titulo">
   <svg class="borda borda--topo" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <path d="M0 0v34c180 28 360-22 600-4 240 18 420-22 600-4V0Z" fill="#FDF6EE"/>
+    <path d="M0 0v34c180 28 360-22 600-4 240 18 420-22 600-4V0Z" fill="#F5EEE3"/>
   </svg>
 
   <div class="container">
@@ -852,7 +859,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </svg>
 </section>
 
-<!-- ====================== 8. COMO FUNCIONA — creme, timeline ============= -->
+<!-- ====================== 7. COMO FUNCIONA — creme, timeline ============= -->
 <section class="section bg-creme" id="como-funciona" aria-labelledby="como-funciona-titulo">
   <div class="container">
     <div class="head head--center rv">
@@ -885,7 +892,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </div>
 </section>
 
-<!-- =============== 9. OFERTA — bloco sólido (laranja-coral) ============== -->
+<!-- =============== 8. OFERTA — bloco sólido (laranja-coral) ============== -->
 <section class="section section--ancora solida oferta com-borda-topo com-borda-base" id="oferta" aria-labelledby="oferta-titulo">
   <svg class="borda borda--topo" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
     <path d="M0 0v30c220 30 400-24 620-6 220 18 400-20 580 2V0Z" fill="#FDF6EE"/>
@@ -932,7 +939,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </svg>
 </section>
 
-<!-- ================================ 10. GARANTIA — creme-alt ============= -->
+<!-- ================================ 9. GARANTIA — creme-alt ============= -->
 <section class="section bg-alt" id="garantia" aria-labelledby="garantia-titulo">
   <div class="container">
     <div class="head rv">
@@ -959,7 +966,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </div>
 </section>
 
-<!-- ======================================= 11. FAQ — creme =============== -->
+<!-- ======================================= 10. FAQ — creme =============== -->
 <section class="section bg-creme" id="faq" aria-labelledby="faq-titulo">
   <div class="container">
     <div class="head head--center rv">
@@ -1004,7 +1011,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </div>
 </section>
 
-<!-- ================================= 12. CTA FINAL — creme ============== -->
+<!-- ================================= 11. CTA FINAL — creme ============== -->
 <section class="section section--ancora bg-creme final" id="cta-final" aria-labelledby="cta-final-titulo">
   <div class="container">
     <div class="rv">

@@ -53,7 +53,6 @@ busca no Unsplash: *happy dog portrait*, *cat portrait studio*.
 | `fonte/build.py` | Gera o `index.html`. Rode depois de qualquer edição. |
 | `fonte/retrato-pet.svg` | Ilustração provisória do hero (some quando `foto-hero.jpg` existir). |
 | `fonte/sos-pet.svg` | Ilustração provisória do Modo SOS (some quando `foto-sos.jpg` existir). |
-| `fonte/multipet.svg` | Ilustração da seção "Tem mais de um pet?". |
 | `fonte/hero-app.svg` | Mockup do app na seção "A virada". |
 | `fonte/baloo2.woff2` | Baloo 2 (Google Fonts, subset latin, SIL OFL 1.1). |
 | `fonte/jakarta.woff2` | Plus Jakarta Sans (Google Fonts, subset latin, SIL OFL 1.1). |
@@ -70,7 +69,6 @@ scroll. As transições entre sólido e creme nunca são um corte reto:
 | 3 | Problema | creme-alt | — |
 | 4 | Virada/Solução | creme | — |
 | 5 | Features | creme-alt | — |
-| 6 | Multi-pet | creme (blob) | — |
 | 7 | Modo SOS | **sólido** — navy-plum escuro, texto branco (blob na foto) | onda ↑ e ↓ |
 | 8 | Como funciona | creme | — |
 | 9 | Oferta | **sólido** — gradiente laranja-coral | onda ↑, scalloped ↓ |
