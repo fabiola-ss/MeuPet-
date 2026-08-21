@@ -282,37 +282,43 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 }
 
 /* ------------------------------------- 9. Identificação (máquina de escrever) */
+/* espaçamentos escopados na seção, para não afetar .head/.lead das outras */
+#identificacao .head{margin-bottom:0}
+#identificacao .head h2{margin-bottom:14px}
+#identificacao .head .lead{font-size:15px;line-height:1.55;opacity:.85;margin-bottom:0}
+
 .palco{
-  position:relative;min-height:190px;margin-block:var(--s6) var(--s5);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;
+  position:relative;text-align:left;
+  max-width:520px;margin:34px auto 26px;padding-top:26px;
 }
-@media (min-width:768px){.palco{min-height:170px}}
 .palco-aspas{
-  position:absolute;top:0;left:50%;transform:translateX(-50%);
-  font-family:var(--font-display);font-weight:800;font-size:56px;line-height:1;
-  color:var(--roxo);opacity:.16;pointer-events:none;user-select:none;
+  position:absolute;top:0;left:-6px;
+  font-family:var(--font-display);font-weight:800;font-size:60px;line-height:1;
+  color:var(--roxo);opacity:.18;pointer-events:none;user-select:none;
 }
 .palco-frase{
-  position:relative;z-index:1;margin:0;max-width:20ch;
-  font-family:var(--font-body);font-style:italic;font-weight:600;
-  font-size:22px;line-height:1.42;color:var(--navy);
+  position:relative;z-index:1;margin:0;
+  font-family:var(--font-body);font-style:italic;font-weight:500;
+  font-size:24px;line-height:1.4;color:var(--navy);
+  /* altura reservada para a frase mais longa (2 linhas em qualquer largura),
+     para o ciclo não pular layout nem sobrar espaço vazio */
+  min-height:calc(2 * 1.4em);
 }
-@media (min-width:768px){.palco-frase{font-size:26px;max-width:24ch}}
 .cursor{
   display:inline-block;width:2px;height:1.05em;margin-left:3px;
   vertical-align:-.14em;background:var(--magenta);border-radius:1px;
   animation:piscar 1s steps(2,start) infinite;
 }
 @keyframes piscar{50%{opacity:0}}
-.palco-pontos{display:flex;justify-content:center;gap:var(--s2);margin-top:var(--s5)}
+.palco-pontos{display:flex;justify-content:flex-start;gap:var(--s2);margin-top:18px}
 .palco-pontos li{
   width:7px;height:7px;border-radius:var(--r-pill);
   background:rgba(36,20,66,.20);transition:background .3s ease-out,transform .3s ease-out;
 }
 .palco-pontos li.on{background:var(--magenta);transform:scale(1.35)}
 .fecho{max-width:640px;margin-inline:auto;text-align:center}
-.fecho .lead{margin-bottom:var(--s3)}
+.fecho .lead{margin-bottom:14px}
+.fecho .lead:last-child{margin-bottom:0}
 
 /* --------------------------------- 10. Problema (lista sem card, só linha) */
 .lista-nua{margin-block:var(--s5);max-width:760px}
@@ -633,7 +639,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 <section class="section bg-creme" id="identificacao" aria-labelledby="identificacao-titulo">
   <div class="container">
     <div class="head head--center rv">
-      <span class="rotulo">A cena que todo tutor já viveu</span>
       <h2 id="identificacao-titulo">Você já passou por isso?</h2>
       <p class="lead">Você está no consultório e o veterinário pergunta:</p>
     </div>
