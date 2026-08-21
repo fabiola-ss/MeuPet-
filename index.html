@@ -310,12 +310,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   animation:piscar 1s steps(2,start) infinite;
 }
 @keyframes piscar{50%{opacity:0}}
-.palco-pontos{display:flex;justify-content:flex-start;gap:var(--s2);margin-top:18px}
-.palco-pontos li{
-  width:7px;height:7px;border-radius:var(--r-pill);
-  background:rgba(36,20,66,.20);transition:background .3s ease-out,transform .3s ease-out;
-}
-.palco-pontos li.on{background:var(--magenta);transform:scale(1.35)}
 .fecho{max-width:640px;margin-inline:auto;text-align:center}
 .fecho .lead{margin-bottom:14px}
 .fecho .lead:last-child{margin-bottom:0}
@@ -655,9 +649,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
     <div class="palco rv" id="palco" aria-hidden="true">
       <span class="palco-aspas">“</span>
       <p class="palco-frase"><span class="palco-texto"></span><span class="cursor"></span></p>
-      <ul class="palco-pontos">
-        <li class="on"></li><li></li><li></li><li></li>
-      </ul>
     </div>
 
     <div class="fecho rv">
@@ -1138,7 +1129,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   var palco = document.getElementById('palco');
   if (palco) {
     var saida = palco.querySelector('.palco-texto');
-    var pontos = palco.querySelectorAll('.palco-pontos li');
     var falas = Array.prototype.map.call(
       document.querySelectorAll('#falas-veterinario li'),
       function (li) { return li.textContent.trim(); }
@@ -1149,16 +1139,9 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
     var MS_PAUSA = 1400;
     var MS_TROCA = 300;
 
-    function marcar(i) {
-      Array.prototype.forEach.call(pontos, function (ponto, j) {
-        ponto.classList.toggle('on', j === i);
-      });
-    }
-
     if (reduz.matches || falas.length === 0) {
       /* sem animação: mostra a primeira fala parada */
       saida.textContent = falas[0] || '';
-      marcar(0);
     } else {
       var atual = 0;
       var letras = 0;
@@ -1180,7 +1163,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         if (letras > 0) { return window.setTimeout(ciclo, MS_APAGA); }
         apagando = false;
         atual = (atual + 1) % falas.length;
-        marcar(atual);
         return window.setTimeout(ciclo, MS_TROCA);
       }());
     }
