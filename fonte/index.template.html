@@ -244,6 +244,8 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   padding-top:calc(var(--header-h) + var(--s5));
   padding-bottom:0;overflow:hidden;
 }
+/* container abaixo da onda (z-index 1) para que ela corte o celular por cima */
+.hero .container{position:relative;z-index:0}
 .hero-copy{max-width:560px;margin-inline:auto;text-align:center;padding-bottom:var(--s6)}
 .hero .pill{background:#FFFFFF;color:var(--navy);margin-bottom:var(--s4)}
 .hero h1{color:#FFFFFF;margin-bottom:var(--s4)}
@@ -266,9 +268,20 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   border-radius:20px 20px 0 0;
 }
 @media (min-width:1024px){
+  /* duas colunas: a copy à esquerda e o celular à direita, ainda sangrando */
   .hero{padding-top:calc(var(--header-h) + var(--s7))}
-  .hero-device{width:300px}
-  .hero-device img{height:340px}
+  .hero-grid{
+    display:grid;grid-template-columns:1fr minmax(300px,380px);
+    gap:var(--s6);align-items:end;
+  }
+  .hero-copy{max-width:none;margin-inline:0;text-align:left;padding-bottom:var(--s8)}
+  .hero .hero-sub{margin-inline:0}
+  .hero .hero-cta{margin-inline:0}
+  .hero-device{
+    width:100%;max-width:340px;margin:0 0 -2px auto;
+    align-self:end;grid-column:2;
+  }
+  .hero-device img{height:400px}
 }
 
 /* --------------------------- 9. Identificação (cena: pergunta -> app) */
@@ -342,6 +355,21 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   font-size:15px;font-weight:700;line-height:1.45;color:var(--navy);
 }
 
+@media (min-width:900px){
+  /* texto à esquerda, celular à direita — o palco continua inteiro */
+  #identificacao{padding-block:var(--s7)}
+  .cena{
+    display:grid;max-width:880px;margin-inline:auto;text-align:left;
+    grid-template-columns:1fr minmax(240px,290px);
+    grid-template-rows:auto auto 1fr;
+    column-gap:var(--s7);align-content:center;
+  }
+  #identificacao h2{grid-column:1;grid-row:1;font-size:30px}
+  .cena-contexto{grid-column:1;grid-row:2;margin:0;max-width:40ch}
+  .cena-palco{grid-column:2;grid-row:1 / span 3;margin:0;align-self:center}
+  .cena-fecho{grid-column:1;grid-row:3;align-self:start;margin:var(--s5) 0 0;max-width:32ch;font-size:17px}
+}
+
 /* --------------------------------- 10. Problema (lista sem card, só linha) */
 .lista-nua{margin-block:var(--s5);max-width:760px}
 .lista-nua .badge svg{stroke-width:2.5}
@@ -350,6 +378,11 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   padding-block:var(--s4);border-bottom:1px solid rgba(36,20,66,.10);
 }
 .lista-nua li:first-child{border-top:1px solid rgba(36,20,66,.10)}
+@media (min-width:900px){
+  .lista-nua{display:grid;grid-template-columns:repeat(2,1fr);column-gap:var(--s6);max-width:none}
+  /* em duas colunas os dois primeiros itens abrem a tabela */
+  .lista-nua li:nth-child(2){border-top:1px solid rgba(36,20,66,.10)}
+}
 .lista-nua p{margin:0;font-size:var(--body-lg);font-weight:400;line-height:1.4;color:var(--txt-titulo)}
 .badge{
   width:48px;height:48px;flex:none;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r-pill);
@@ -404,8 +437,8 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .carrossel-nav svg{width:20px;height:20px}
 /* a trilha sangra até a borda direita, deixando o próximo card cortado */
 .trilha{
-  /* flex-start: só dois cards têm print, e o stretch padrão esticaria os
-     outros até a mesma altura, deixando um vazio grande embaixo deles */
+  /* altura natural por card: com stretch, os seis cards sem print ficam com
+     um vazio branco dentro, que lê pior do que a sobra abaixo da fileira */
   display:flex;align-items:flex-start;gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;
   padding-block:var(--s2) var(--s5);
   margin-right:calc(50% - 50vw);padding-right:max(var(--s4),calc(50vw - 50% + var(--s4)));
@@ -418,6 +451,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .trilha:focus-visible{outline:2px solid var(--roxo);outline-offset:4px}
 .card-f{
   flex:0 0 clamp(230px,72vw,282px);scroll-snap-align:start;
+  display:flex;flex-direction:column;
   background:var(--branco);border-radius:var(--r-md);padding:var(--s4);
   box-shadow:var(--sh-leve);transition:var(--t);
 }
@@ -432,7 +466,9 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .card-f h3{margin-bottom:var(--s2)}
 .card-f p{font-size:var(--body);color:var(--txt-corpo)}
 .card-f-print{
-  display:block;width:100%;height:150px;margin-top:var(--s3);
+  /* ancorado no rodapé do card: com alturas iguais na trilha, o print de um
+     card não deixa buraco no meio dos outros */
+  display:block;width:100%;height:130px;margin-top:var(--s3);
   object-fit:cover;object-position:top;
   border-radius:14px;border:1px solid rgba(36,20,66,.08);
 }
@@ -462,6 +498,20 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
 .sos-legenda{
   margin-top:18px;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.6);
+}
+
+@media (min-width:900px){
+  .sos-conteudo{
+    max-width:880px;display:grid;text-align:left;
+    grid-template-columns:1fr minmax(240px,290px);
+    grid-template-rows:auto 1fr;
+    column-gap:var(--s7);align-content:center;
+  }
+  .sos-conteudo > .sos-copy{grid-column:1;grid-row:1;align-self:start}
+  .sos-conteudo > .device{grid-column:2;grid-row:1 / span 2;align-self:center}
+  .sos-conteudo > .sos-legenda{grid-column:1;grid-row:2;align-self:start;margin-top:var(--s4)}
+  #modo-sos h2{font-size:30px}
+  .sos-intro{margin-bottom:var(--s4)}
 }
 
 /* ------------------------------------------- 15. Como funciona (timeline) */
@@ -552,6 +602,19 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .oferta .btn--claro{max-width:460px;box-shadow:0 8px 20px rgba(36,20,66,.2)}
 .oferta .btn--claro:hover{box-shadow:0 12px 26px rgba(36,20,66,.26)}
 .oferta .nota--clara{color:var(--navy);opacity:.85;font-style:italic;font-size:var(--caption)}
+
+@media (min-width:900px){
+  /* texto e checklist à esquerda, preço e CTA à direita */
+  .oferta .container{max-width:960px;text-align:left}
+  /* dois filhos apenas: sem linhas espalhadas nem pill esticada */
+  .oferta-grid{
+    display:grid;grid-template-columns:1fr 340px;
+    column-gap:var(--s7);align-items:center;
+  }
+  .oferta h2{font-size:30px}
+  .oferta-check{margin-block:var(--s4) 0}
+  .oferta .btn--claro{max-width:none}
+}
 
 /* ------------------------------------------------------- 17. Garantia */
 
@@ -648,6 +711,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 <!-- ==================== 1. HERO — bloco sólido (gradiente da marca) ====== -->
 <section class="hero solida com-borda-base" id="topo" aria-labelledby="hero-titulo">
   <div class="container">
+    <div class="hero-grid">
     <div class="hero-copy rv">
       <p class="pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg>
@@ -665,10 +729,11 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
       <p class="hero-preco">7 dias grátis. Depois, <strong>R$ 12,90/mês.</strong></p>
     </div>
-  </div>
 
-  <div class="hero-device rv" style="--d:.12s">
-    <img src="__PRINT_MEUSPETS__" width="738" height="1439" alt="Tela inicial do aplicativo com a lista de pets e o resumo de saúde de cada um: vacinas e vermífugo em dia, com as próximas datas e um botão de SOS." decoding="async" fetchpriority="high">
+    <div class="hero-device rv" style="--d:.12s">
+        <img src="__PRINT_MEUSPETS__" width="738" height="1439" alt="Tela inicial do aplicativo com a lista de pets e o resumo de saúde de cada um: vacinas e vermífugo em dia, com as próximas datas e um botão de SOS." decoding="async" fetchpriority="high">
+    </div>
+    </div>
   </div>
 
   <!-- transição scalloped para o creme -->
@@ -886,7 +951,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
   <div class="container">
     <div class="sos-conteudo">
-      <div class="rv">
+      <div class="sos-copy rv">
         <p class="selo-sos"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 21.5 19.5a1.8 1.8 0 0 1-1.6 2.7H4.1a1.8 1.8 0 0 1-1.6-2.7z"/><path d="M12 9.5v5"/><path d="M12 18h.01"/></svg>
           Emergência</p>
         <h2 id="sos-titulo">E numa emergência, cada segundo conta.</h2>
@@ -945,7 +1010,8 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   </svg>
 
   <div class="container">
-    <div class="rv">
+    <div class="oferta-grid rv">
+      <div class="oferta-texto">
       <p class="oferta-pill">Oferta</p>
       <h2 id="oferta-titulo">7 dias grátis pra você comprovar.</h2>
       <p class="lead">Você não precisa decidir agora. Durante os 7 primeiros dias, o acesso é completo:</p>
@@ -957,7 +1023,9 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>Configure lembretes</li>
         <li class="cheia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>Conheça o Modo SOS</li>
       </ul>
+      </div>
 
+      <div class="oferta-fecho">
       <div class="preco-card">
         <div class="preco-listra" aria-hidden="true"></div>
         <div class="preco-corpo">
@@ -975,6 +1043,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
           <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
         </a>
         <p class="nota nota--clara">Cancele quando quiser. A cobrança só começa depois dos 7 dias grátis.</p>
+      </div>
       </div>
     </div>
   </div>
