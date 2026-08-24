@@ -589,16 +589,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .oferta .nota--clara{color:var(--navy);opacity:.85;font-style:italic;font-size:var(--caption)}
 
 /* ------------------------------------------------------- 17. Garantia */
-.garantias{display:grid;gap:var(--s3);max-width:720px;margin-bottom:0}
-.garantias li{display:flex;align-items:flex-start;gap:var(--s3)}
-/* mesmo tratamento dos ícones do carrossel: quadrado arredondado, pastel rosa */
-.check{
-  width:30px;height:30px;flex:none;margin-top:-3px;border-radius:9px;
-  background:#FCE1EC;color:var(--magenta);
-  display:inline-flex;align-items:center;justify-content:center;
-}
-.check svg{width:16px;height:16px}
-.garantias p{margin:0;font-size:var(--body-lg);font-weight:400;line-height:1.5;color:var(--txt-titulo)}
 
 /* ------------------------------------------------------------ 18. FAQ */
 .faq{max-width:780px;margin-inline:auto;border-top:1px solid rgba(36,20,66,.12)}
@@ -1071,32 +1061,8 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
   <!-- transição scalloped para o creme-alt -->
   <svg class="borda borda--base" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <path d="M0 60V30a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0V60Z" fill="#F5EEE3"/>
+    <path d="M0 60V30a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0a50 30 0 0 1 100 0V60Z" fill="#FDF6EE"/>
   </svg>
-</section>
-
-<!-- ================================ 9. GARANTIA — creme-alt ============= -->
-<section class="section bg-alt" id="garantia" aria-labelledby="garantia-titulo">
-  <div class="container">
-    <div class="head rv">
-      <h2 id="garantia-titulo">Sem pegadinha, sem letra miúda.</h2>
-    </div>
-
-    <ul class="garantias">
-      <li class="rv">
-        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg></span>
-        <p>O cartão é cadastrado agora, mas a cobrança só acontece depois dos 7 dias grátis.</p>
-      </li>
-      <li class="rv" style="--d:.08s">
-        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg></span>
-        <p>Você cancela quando quiser, direto no app.</p>
-      </li>
-      <li class="rv" style="--d:.16s">
-        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg></span>
-        <p>Nenhuma multa, nenhuma fidelidade.</p>
-      </li>
-    </ul>
-  </div>
 </section>
 
 <!-- ======================================= 10. FAQ — creme =============== -->
