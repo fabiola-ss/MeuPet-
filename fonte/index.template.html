@@ -271,17 +271,18 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   /* duas colunas: a copy à esquerda e o celular à direita, ainda sangrando */
   .hero{padding-top:calc(var(--header-h) + var(--s7))}
   .hero-grid{
-    display:grid;grid-template-columns:1fr minmax(300px,380px);
+    display:grid;grid-template-columns:1fr minmax(340px,450px);
     gap:var(--s6);align-items:end;
   }
   .hero-copy{max-width:none;margin-inline:0;text-align:left;padding-bottom:var(--s8)}
   .hero .hero-sub{margin-inline:0}
   .hero .hero-cta{margin-inline:0}
   .hero-device{
-    width:100%;max-width:340px;margin:0 0 -2px auto;
+    width:100%;max-width:450px;margin:0 0 -2px auto;
     align-self:end;grid-column:2;
+    border-radius:34px 34px 0 0;padding:9px 9px 0;
   }
-  .hero-device img{height:400px}
+  .hero-device img{height:520px;border-radius:26px 26px 0 0}
 }
 
 /* --------------------------- 9. Identificação (cena: pergunta -> app) */
@@ -340,6 +341,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   opacity:0;transition:opacity .3s ease-out;
 }
 .cena-tela img.on{opacity:1}
+@media (min-width:1024px){
+  .cena-device{max-width:360px;border-radius:38px;padding:10px}
+  .cena-tela{height:490px;border-radius:30px}
+}
 
 /* --- pontinhos --- */
 .cena-pontos{display:flex;justify-content:center;gap:var(--s2);margin-top:22px}
@@ -359,15 +364,17 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   /* texto à esquerda, celular à direita — o palco continua inteiro */
   #identificacao{padding-block:var(--s7)}
   .cena{
-    display:grid;max-width:880px;margin-inline:auto;text-align:left;
-    grid-template-columns:1fr minmax(240px,290px);
-    grid-template-rows:auto auto 1fr;
-    column-gap:var(--s7);align-content:center;
+    display:grid;max-width:1000px;margin-inline:auto;text-align:left;
+    grid-template-columns:1fr minmax(320px,380px);
+    /* as duas faixas 1fr sobram acima e abaixo do texto: com o celular alto,
+       é o que mantém a copy centrada na altura dele */
+    grid-template-rows:1fr auto auto auto 1fr;
+    column-gap:var(--s7);
   }
-  #identificacao h2{grid-column:1;grid-row:1;font-size:30px}
-  .cena-contexto{grid-column:1;grid-row:2;margin:0;max-width:40ch}
-  .cena-palco{grid-column:2;grid-row:1 / span 3;margin:0;align-self:center}
-  .cena-fecho{grid-column:1;grid-row:3;align-self:start;margin:var(--s5) 0 0;max-width:32ch;font-size:17px}
+  #identificacao h2{grid-column:1;grid-row:2;font-size:30px}
+  .cena-contexto{grid-column:1;grid-row:3;margin:0;max-width:40ch}
+  .cena-palco{grid-column:2;grid-row:1 / span 5;margin:0;align-self:center}
+  .cena-fecho{grid-column:1;grid-row:4;margin:var(--s5) 0 0;max-width:32ch;font-size:17px}
 }
 
 /* --------------------------------- 10. Problema (lista sem card, só linha) */
@@ -401,6 +408,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   max-width:280px;margin:0 auto;
 }
 .device img{display:block;width:100%;border-radius:24px}
+@media (min-width:1024px){
+  .device{max-width:410px;border-radius:38px;padding:10px}
+  .device img{border-radius:30px}
+}
 
 /* --------------------------------------- 11. Solução (texto + mockup solto) */
 .solucao-grid{display:grid;gap:var(--s6);align-items:center}
@@ -472,6 +483,12 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   object-fit:cover;object-position:top;
   border-radius:14px;border:1px solid rgba(36,20,66,.08);
 }
+@media (min-width:1024px){
+  .card-f{flex-basis:330px}
+  /* 180px é o meio-termo: o print cresce, mas os dois cards com imagem não
+     ficam tão mais altos que os outros a ponto de abrir um vão na trilha */
+  .card-f-print{height:180px}
+}
 .dica-rolar{display:flex;align-items:center;gap:var(--s2);font-size:var(--caption);color:var(--txt-apoio)}
 .dica-rolar svg{width:16px;height:16px;flex:none}
 @media (min-width:768px){.dica-rolar{display:none}}
@@ -502,14 +519,15 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
 @media (min-width:900px){
   .sos-conteudo{
-    max-width:880px;display:grid;text-align:left;
-    grid-template-columns:1fr minmax(240px,290px);
-    grid-template-rows:auto 1fr;
-    column-gap:var(--s7);align-content:center;
+    max-width:1020px;display:grid;text-align:left;
+    grid-template-columns:1fr minmax(340px,430px);
+    /* faixas 1fr acima e abaixo: o texto fica centrado na altura do celular */
+    grid-template-rows:1fr auto auto 1fr;
+    column-gap:var(--s7);
   }
-  .sos-conteudo > .sos-copy{grid-column:1;grid-row:1;align-self:start}
-  .sos-conteudo > .device{grid-column:2;grid-row:1 / span 2;align-self:center}
-  .sos-conteudo > .sos-legenda{grid-column:1;grid-row:2;align-self:start;margin-top:var(--s4)}
+  .sos-conteudo > .sos-copy{grid-column:1;grid-row:2}
+  .sos-conteudo > .device{grid-column:2;grid-row:1 / span 4;align-self:center}
+  .sos-conteudo > .sos-legenda{grid-column:1;grid-row:3;margin-top:var(--s4)}
   #modo-sos h2{font-size:30px}
   .sos-intro{margin-bottom:var(--s4)}
 }
