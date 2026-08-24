@@ -26,22 +26,18 @@ Troque pelo link real de assinatura. Procure no `fonte/index.template.html`:
 <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
 ```
 
-### 2. Fotos reais de pet
+### 2. Peso da página
 
-O layout já está montado para foto real em dois pontos — hero e Modo SOS — mas
-os arquivos ainda não estão no repositório. Enquanto não estiverem, uma
-ilustração ocupa o lugar. Para trocar, coloque os arquivos em `fonte/` e rode o
-build:
+Os cinco prints do app são embutidos em base64, então o `index.html` fica em
+torno de **930 KB**. Como os prints estão dentro do HTML, o `loading="lazy"`
+não reduz o que é baixado: o navegador precisa do arquivo inteiro antes de
+desenhar qualquer coisa.
 
-```bash
-# baixe do Unsplash (licença livre) e salve como:
-#   fonte/foto-hero.jpg   faixa horizontal (~3:1), rosto do pet centralizado
-python3 fonte/build.py
-```
-
-O script detecta os arquivos sozinho — `.jpg`, `.jpeg`, `.png` ou `.webp` — e
-embute cada um no `index.html`. Nada mais precisa ser editado. Sugestões de
-busca no Unsplash: *happy dog portrait*, *cat portrait studio*.
+Se a velocidade de carregamento incomodar, o caminho é servir os prints como
+arquivos separados ao lado do `index.html` em vez de embutidos — o HTML volta
+para ~160 KB e as imagens passam a carregar em paralelo e sob demanda. Isso
+abre mão do "arquivo único", mas no Netlify (que publica a pasta inteira) não
+faz diferença nenhuma no deploy.
 
 ## Arquivos
 
@@ -50,8 +46,7 @@ busca no Unsplash: *happy dog portrait*, *cat portrait studio*.
 | `index.html` | **A página.** Único arquivo necessário para publicar. |
 | `fonte/index.template.html` | HTML de origem, com marcadores no lugar das fontes e imagens. É aqui que se edita. |
 | `fonte/build.py` | Gera o `index.html`. Rode depois de qualquer edição. |
-| `fonte/retrato-pet.svg` | Ilustração provisória do hero (some quando `foto-hero.jpg` existir). |
-| `fonte/hero-app.svg` | Mockup do app na seção "A virada". |
+| `fonte/prints/*.webp` | Os cinco prints reais do aplicativo, em WebP. |
 | `fonte/baloo2.woff2` | Baloo 2 (Google Fonts, subset latin, SIL OFL 1.1). |
 | `fonte/jakarta.woff2` | Plus Jakarta Sans (Google Fonts, subset latin, SIL OFL 1.1). |
 

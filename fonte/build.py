@@ -6,13 +6,8 @@ que a página publicada não faça nenhuma requisição externa.
 
     python3 fonte/build.py
 
-Fotos reais: basta colocar os arquivos abaixo na pasta fonte/ e rodar de novo.
-Enquanto eles não existirem, a ilustração correspondente é usada no lugar.
-
-    fonte/foto-hero.jpg  -> foto do pet no topo da página. O slot é uma faixa
-                            larga (100% de largura por 150-200px de altura), então
-                            use um recorte horizontal, ~3:1, com o rosto do pet
-                            centralizado. Foto vertical corta mal aqui.
+Os prints do aplicativo ficam em fonte/prints/ em WebP. Para trocar algum,
+substitua o arquivo e rode este script de novo.
 """
 
 import base64
@@ -31,8 +26,11 @@ TIPOS = {
 ALVOS = [
     ("__FONT_BALOO__",   ["baloo2.woff2"],                       True),
     ("__FONT_JAKARTA__", ["jakarta.woff2"],                      True),
-    ("__FOTO_HERO__",    ["foto-hero", "retrato-pet.svg"],       False),
-    ("__IMG_APP__",      ["hero-app.svg"],                       False),
+    ("__PRINT_MEUSPETS__", ["prints/app-meus-pets.webp"],        False),
+    ("__PRINT_HISTORICO__", ["prints/app-historico.webp"],       False),
+    ("__PRINT_SOS__",      ["prints/app-modo-sos.webp"],         False),
+    ("__PRINT_REMEDIO__",  ["prints/app-lembrete-remedio.webp"], False),
+    ("__PRINT_PDF__",      ["prints/app-historico-pdf.webp"],    False),
 ]
 
 

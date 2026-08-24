@@ -239,34 +239,36 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .section--ancora.com-borda-base{padding-bottom:calc(var(--s8) + var(--edge))}
 
 /* --------------------------------------------------------------- 8. Hero */
-/* navy da wordmark como âncora: topo mais escuro, base em roxo */
 .hero{
   background:linear-gradient(160deg,#241442 0%,#6D2E8C 55%,#9B2FC9 100%);
   padding-top:calc(var(--header-h) + var(--s5));
+  padding-bottom:0;overflow:hidden;
 }
-.hero-copy{max-width:560px;margin-inline:auto;text-align:center}
+.hero-copy{max-width:560px;margin-inline:auto;text-align:center;padding-bottom:var(--s6)}
 .hero .pill{background:#FFFFFF;color:var(--navy);margin-bottom:var(--s4)}
 .hero h1{color:#FFFFFF;margin-bottom:var(--s4)}
-.hero .hero-sub{
-  color:#FFFFFF;font-size:16px;line-height:1.55;opacity:.92;
-  margin-bottom:var(--s5);
-}
-.hero-foto{margin:0 0 var(--s5)}
-.hero-foto img{
-  width:100%;height:clamp(150px,30vw,200px);
-  object-fit:cover;object-position:center 42%;
-  border-radius:var(--r-md);
-}
+.hero p{color:#FFFFFF}
+.hero .hero-sub{font-size:16px;line-height:1.55;opacity:.92;margin-bottom:var(--s5)}
 .hero .hero-cta{display:flex;width:100%;max-width:400px;margin-inline:auto}
-.hero .hero-preco{
-  color:#FFFFFF;font-size:13px;line-height:1.5;opacity:.85;
-  margin-top:var(--s3);
-}
+.hero .hero-preco{font-size:13px;line-height:1.5;opacity:.85;margin-top:var(--s3)}
 .hero .hero-preco strong{color:#FFFFFF}
 
+/* o celular fica abaixo da onda (z-index 0) para ser cortado por ela */
+.hero-device{
+  position:relative;z-index:0;
+  width:236px;margin:0 auto -2px;
+  background:#1A0F2E;border-radius:26px 26px 0 0;padding:7px 7px 0;
+  box-shadow:0 -6px 40px rgba(0,0,0,.35);
+}
+.hero-device img{
+  display:block;width:100%;height:250px;
+  object-fit:cover;object-position:top;
+  border-radius:20px 20px 0 0;
+}
 @media (min-width:1024px){
   .hero{padding-top:calc(var(--header-h) + var(--s7))}
-  .hero-foto img{height:200px}
+  .hero-device{width:300px}
+  .hero-device img{height:340px}
 }
 
 /* --------------------------- 9. Identificação (cena: pergunta -> app) */
@@ -311,43 +313,20 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   color:var(--roxo);opacity:.45;
 }
 
-/* --- celular respondendo --- */
-.cena-fone{
-  background:var(--navy);border-radius:26px;padding:8px;
-  box-shadow:0 14px 34px rgba(36,20,66,.22);
+/* --- celular com o print que responde à pergunta --- */
+.cena-device{
+  background:#241442;border-radius:30px;padding:8px;
+  box-shadow:0 16px 38px rgba(36,20,66,.24);
+  max-width:240px;margin:0 auto;
 }
-.cena-tela{background:var(--branco);border-radius:20px;overflow:hidden}
-.cena-topo{
-  background:linear-gradient(100deg,#EC1361,#9B2FC9);
-  padding:12px 14px;display:flex;align-items:center;gap:9px;
+/* altura fixa: a troca de print não mexe no layout */
+.cena-tela{position:relative;height:320px;border-radius:24px;overflow:hidden}
+.cena-tela img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:top;
+  opacity:0;transition:opacity .3s ease-out;
 }
-.cena-pata{
-  width:26px;height:26px;flex:none;border-radius:var(--r-pill);background:var(--branco);
-  display:inline-flex;align-items:center;justify-content:center;font-size:13px;line-height:1;
-}
-.cena-pet{display:flex;flex-direction:column;min-width:0}
-.cena-pet-nome{color:#FFFFFF;font-size:12.5px;font-weight:700;line-height:1.3}
-.cena-pet-sub{color:rgba(255,255,255,.75);font-size:10px;line-height:1.3}
-
-.cena-corpo{padding:14px;transition:opacity .3s ease-out}
-.cena-corpo.trocando{opacity:0}
-.cena-label{
-  font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  color:#8B839A;margin-bottom:9px;
-}
-.cena-entrada{
-  display:flex;gap:10px;padding:10px;border-radius:13px;background:var(--creme);margin-bottom:7px;
-}
-.cena-entrada:last-child{margin-bottom:0}
-.cena-ic{
-  width:30px;height:30px;flex:none;border-radius:9px;
-  display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;
-}
-.cena-ic--rosa{background:#FCE1EC}
-.cena-ic--roxo{background:#F1E3FA}
-.cena-txt{display:flex;flex-direction:column;min-width:0}
-.cena-nome{font-size:12.5px;font-weight:700;line-height:1.3;color:var(--navy)}
-.cena-det{font-size:11px;line-height:1.35;color:#8B839A;margin-top:2px}
+.cena-tela img.on{opacity:1}
 
 /* --- pontinhos --- */
 .cena-pontos{display:flex;justify-content:center;gap:var(--s2);margin-top:22px}
@@ -382,11 +361,18 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .remate{max-width:680px}
 .remate .lead{color:var(--txt-titulo)}
 
+/* ------------------------------- 10b. Moldura de celular (prints do app) */
+.device{
+  background:#241442;border-radius:30px;padding:8px;
+  box-shadow:0 16px 38px rgba(36,20,66,.24);
+  max-width:280px;margin:0 auto;
+}
+.device img{display:block;width:100%;border-radius:24px}
+
 /* --------------------------------------- 11. Solução (texto + mockup solto) */
 .solucao-grid{display:grid;gap:var(--s6);align-items:center}
 @media (min-width:900px){.solucao-grid{grid-template-columns:1.1fr .9fr}}
-.mockup{position:relative;display:flex;justify-content:center}
-.mockup img{width:min(100%,300px);filter:drop-shadow(0 24px 44px rgba(36,20,66,.20))}
+.mockup{position:relative}
 /* selo flutuante, metade dentro e metade fora da base do mockup */
 .selo-pets{
   /* left/right 0 + margem automática em vez de left:50%, senão a largura
@@ -418,7 +404,9 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .carrossel-nav svg{width:20px;height:20px}
 /* a trilha sangra até a borda direita, deixando o próximo card cortado */
 .trilha{
-  display:flex;gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;
+  /* flex-start: só dois cards têm print, e o stretch padrão esticaria os
+     outros até a mesma altura, deixando um vazio grande embaixo deles */
+  display:flex;align-items:flex-start;gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;
   padding-block:var(--s2) var(--s5);
   margin-right:calc(50% - 50vw);padding-right:max(var(--s4),calc(50vw - 50% + var(--s4)));
   scrollbar-width:none;-ms-overflow-style:none;
@@ -443,6 +431,11 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .card-f .badge--laranja{background:linear-gradient(160deg,#FFE8D9,#FFD8BF)}
 .card-f h3{margin-bottom:var(--s2)}
 .card-f p{font-size:var(--body);color:var(--txt-corpo)}
+.card-f-print{
+  display:block;width:100%;height:150px;margin-top:var(--s3);
+  object-fit:cover;object-position:top;
+  border-radius:14px;border:1px solid rgba(36,20,66,.08);
+}
 .dica-rolar{display:flex;align-items:center;gap:var(--s2);font-size:var(--caption);color:var(--txt-apoio)}
 .dica-rolar svg{width:16px;height:16px;flex:none}
 @media (min-width:768px){.dica-rolar{display:none}}
@@ -466,34 +459,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
 #modo-sos h2{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:14px}
 .sos-intro{font-size:15px;line-height:1.6;color:rgba(255,255,255,.82);margin-bottom:28px}
-
-/* --- cartão de emergência --- */
-.sos-cartao{
-  background:var(--branco);border-radius:22px;overflow:hidden;text-align:left;
-  box-shadow:0 16px 38px rgba(0,0,0,.32);
-}
-.sos-cartao-topo{
-  background:linear-gradient(90deg,#FF6B35,#E8342F);
-  padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:var(--s3);
-}
-.sos-cartao-marca{display:inline-flex;align-items:center;gap:var(--s2);color:#FFFFFF;font-size:13px;font-weight:800;letter-spacing:.05em}
-.sos-cartao-marca svg{width:17px;height:17px;flex:none;stroke:#FFFFFF;stroke-width:2.6}
-.sos-cartao-pet{color:rgba(255,255,255,.9);font-size:11px;font-weight:600;white-space:nowrap}
-
-.sos-cartao-corpo{padding:16px}
-.sos-divisoria{height:1px;background:#F0EBE4;margin:14px 0}
-.sos-label{
-  font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-  color:#8B839A;margin-bottom:6px;
-}
-.sos-chips{display:flex;flex-wrap:wrap;gap:6px}
-.sos-chip{
-  font-size:12px;font-weight:600;line-height:1.3;padding:6px 11px;border-radius:var(--r-pill);
-}
-.sos-chip--alerta{background:#FFE4DC;color:#C43D1E}
-.sos-chip--remedio{background:#F1E3FA;color:#7B21A8}
-.sos-dado{font-size:13px;font-weight:600;line-height:1.35;color:var(--navy);margin:0}
-.sos-detalhe{font-size:11.5px;font-weight:500;line-height:1.35;color:#8B839A;margin:2px 0 0}
 
 .sos-legenda{
   margin-top:18px;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.6);
@@ -693,10 +658,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
       <p class="hero-sub">Vacinas, medicamentos, exames e documentos — tudo num só lugar, com lembretes automáticos.</p>
 
-      <figure class="hero-foto">
-        <img src="__FOTO_HERO__" width="720" height="900" alt="Cachorro olhando diretamente para a câmera, com expressão tranquila." loading="eager" decoding="async" fetchpriority="high">
-      </figure>
-
       <a class="btn btn--primario hero-cta" href="#oferta">
         QUERO CUIDAR DO MEU PET
         <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
@@ -704,6 +665,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
       <p class="hero-preco">7 dias grátis. Depois, <strong>R$ 12,90/mês.</strong></p>
     </div>
+  </div>
+
+  <div class="hero-device rv" style="--d:.12s">
+    <img src="__PRINT_MEUSPETS__" width="738" height="1439" alt="Tela inicial do aplicativo com a lista de pets e o resumo de saúde de cada um: vacinas e vermífugo em dia, com as próximas datas e um botão de SOS." decoding="async" fetchpriority="high">
   </div>
 
   <!-- transição scalloped para o creme -->
@@ -739,19 +704,12 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
         <p class="cena-seta">↓</p>
 
-        <div class="cena-fone">
-          <div class="cena-tela">
-            <div class="cena-topo">
-              <span class="cena-pata">🐾</span>
-              <span class="cena-pet">
-                <span class="cena-pet-nome">Thor</span>
-                <span class="cena-pet-sub">Golden Retriever · 4 anos</span>
-              </span>
-            </div>
-            <div class="cena-corpo" id="cena-corpo">
-              <p class="cena-label"></p>
-              <div class="cena-entradas"></div>
-            </div>
+        <div class="cena-device">
+          <div class="cena-tela" id="cena-tela">
+            <img class="on" src="__PRINT_HISTORICO__" width="738" height="1439" alt="Tela de histórico do aplicativo, com os registros do pet listados por data." loading="lazy" decoding="async">
+            <img src="__PRINT_REMEDIO__" width="738" height="1439" alt="Tela de cadastro de remédio no aplicativo, com horários das doses e lembrete." loading="lazy" decoding="async">
+            <img src="__PRINT_MEUSPETS__" width="738" height="1439" alt="Tela inicial do aplicativo com o resumo de saúde do pet e as vacinas em dia." loading="lazy" decoding="async">
+            <img src="__PRINT_SOS__" width="738" height="1439" alt="Ficha de emergência do aplicativo, com alergias, peso e tratamentos ativos." loading="lazy" decoding="async">
           </div>
         </div>
 
@@ -822,8 +780,8 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         <p class="lead">Não é agenda, nem pasta de fotos: é o histórico de saúde completo do seu pet, sempre à mão, pronto pra qualquer pergunta que surgir.</p>
       </div>
       <div class="rv" style="--d:.12s">
-        <div class="mockup">
-          <img src="__IMG_APP__" width="460" height="620" alt="Tela do aplicativo Meu Pet+ com os registros de vacinas, medicamentos e exames do pet e o botão de Modo SOS." loading="lazy" decoding="async">
+        <div class="mockup device">
+          <img src="__PRINT_HISTORICO__" width="738" height="1439" alt="Tela de histórico do aplicativo, com campo de busca, filtros por tipo de registro — consulta, vacina, receita, exame, cirurgia — e os registros do pet listados por data." loading="lazy" decoding="async">
           <p class="selo-pets">
             <span class="selo-pets-bichos" aria-hidden="true">🐶🐱🐰</span>
             Quantos pets você quiser, numa conta só
@@ -906,6 +864,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         </span>
         <h3>Lembretes automáticos</h3>
         <p>Você recebe notificações automáticas pra não esquecer datas e cuidados importantes.</p>
+        <img class="card-f-print" src="__PRINT_REMEDIO__" width="738" height="1439" alt="Tela de cadastro de remédio no aplicativo, com nome, dosagem, duração em dias, horários das doses e a opção de criar lembrete." loading="lazy" decoding="async">
       </li>
       <li class="card-f rv" style="--d:.18s">
         <span class="badge badge--roxo" aria-hidden="true">
@@ -913,6 +872,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         </span>
         <h3>Histórico em PDF</h3>
         <p>Gere um PDF atualizado na hora, pronto pra levar ao veterinário.</p>
+        <img class="card-f-print" src="__PRINT_PDF__" width="738" height="1439" alt="Documento de histórico médico gerado pelo aplicativo, com os dados do pet e a lista de registros, pronto para imprimir ou salvar em PDF." loading="lazy" decoding="async">
       </li>
     </ul>
   </div>
@@ -933,48 +893,8 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         <p class="sos-intro">O Modo SOS reúne tudo que o veterinário precisa saber numa tela só — pronta pra mostrar, sem procurar nada.</p>
       </div>
 
-      <div class="sos-cartao rv" style="--d:.12s">
-        <div class="sos-cartao-topo">
-          <span class="sos-cartao-marca"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 21.5 19.5a1.8 1.8 0 0 1-1.6 2.7H4.1a1.8 1.8 0 0 1-1.6-2.7z"/><path d="M12 9.5v5"/><path d="M12 18h.01"/></svg>
-          MODO SOS</span>
-          <span class="sos-cartao-pet">Thor · 4 anos</span>
-        </div>
-
-        <div class="sos-cartao-corpo">
-          <div>
-            <p class="sos-label">Alergias</p>
-            <div class="sos-chips">
-              <span class="sos-chip sos-chip--alerta">Frango</span>
-              <span class="sos-chip sos-chip--alerta">Fipronil</span>
-            </div>
-          </div>
-
-          <div class="sos-divisoria" aria-hidden="true"></div>
-
-          <div>
-            <p class="sos-label">Medicamentos em uso</p>
-            <div class="sos-chips">
-              <span class="sos-chip sos-chip--remedio">Apoquel 16mg</span>
-              <span class="sos-chip sos-chip--remedio">Omega 3</span>
-            </div>
-          </div>
-
-          <div class="sos-divisoria" aria-hidden="true"></div>
-
-          <div>
-            <p class="sos-label">Dados essenciais</p>
-            <p class="sos-dado">Golden Retriever · 32 kg</p>
-            <p class="sos-detalhe">Castrado · Microchip 982000123456789</p>
-          </div>
-
-          <div class="sos-divisoria" aria-hidden="true"></div>
-
-          <div>
-            <p class="sos-label">Veterinário de referência</p>
-            <p class="sos-dado">Clínica VetSul</p>
-            <p class="sos-detalhe">(54) 99123-4567</p>
-          </div>
-        </div>
+      <div class="device rv" style="--d:.12s">
+        <img src="__PRINT_SOS__" width="738" height="1439" alt="Ficha de emergência do aplicativo, com a faixa de informação crítica destacando as alergias, além de peso, microchip, veterinário, situação das vacinas e tratamentos ativos." loading="lazy" decoding="async">
       </div>
 
       <p class="sos-legenda rv">Uma tela. Tudo que importa na hora certa.</p>
@@ -1213,9 +1133,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   var cena = document.getElementById('cena');
   if (cena) {
     var saida = cena.querySelector('.cena-texto');
-    var corpo = document.getElementById('cena-corpo');
-    var rotulo = corpo.querySelector('.cena-label');
-    var entradas = corpo.querySelector('.cena-entradas');
+    var telas = cena.querySelectorAll('.cena-tela img');
     var pontos = cena.querySelectorAll('.cena-pontos li');
 
     var falas = Array.prototype.map.call(
@@ -1223,31 +1141,14 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
       function (li) { return li.textContent.trim(); }
     );
 
-    /* Conteúdo ilustrativo do app, um por pergunta e na mesma ordem da lista
-       acima. É amostra de interface, não copy da página. */
-    var CENAS = [
-      { rotulo: 'Histórico de consultas', itens: [
-        { icone: '🩺', tom: 'rosa', nome: 'Dermatite alérgica', det: '12 mar 2025 · Clínica VetSul' },
-        { icone: '🧪', tom: 'roxo', nome: 'Exame de pele — resultado anexado', det: '14 mar 2025' }
-      ]},
-      { rotulo: 'Medicamentos', itens: [
-        { icone: '💊', tom: 'rosa', nome: 'Apoquel 16mg', det: '1x ao dia · 14 dias' },
-        { icone: '💊', tom: 'roxo', nome: 'Antibiótico Cefalexina', det: 'Finalizado em 26 mar 2025' }
-      ]},
-      { rotulo: 'Vacinas', itens: [
-        { icone: '💉', tom: 'rosa', nome: 'V10 (múltipla)', det: '08 jan 2025 · próxima em jan 2026' },
-        { icone: '💉', tom: 'roxo', nome: 'Antirrábica', det: '08 jan 2025' }
-      ]},
-      { rotulo: 'Alergias registradas', itens: [
-        { icone: '⚠️', tom: 'rosa', nome: 'Frango e derivados', det: 'Confirmado por exame' },
-        { icone: '⚠️', tom: 'roxo', nome: 'Antipulgas com fipronil', det: 'Reação em 2024' }
-      ]}
-    ];
-
     var MS_DIGITA = 45;
     var MS_APAGA = 25;
     var MS_PAUSA = 1400;
     var MS_TROCA = 300;
+
+    var atual = 0;
+    var letras = 0;
+    var apagando = false;
 
     function marcar(i) {
       Array.prototype.forEach.call(pontos, function (ponto, j) {
@@ -1255,74 +1156,19 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
       });
     }
 
+    /* Os quatro prints ficam empilhados na tela do celular; trocar a classe
+       'on' faz o cross-fade de 0.3s definido no CSS. Como a altura da tela é
+       fixa, a troca não mexe no layout. */
     function pintar(i) {
-      var c = CENAS[i];
-      if (!c) { return; }
-      rotulo.textContent = c.rotulo;
-      entradas.textContent = '';
-      c.itens.forEach(function (item) {
-        var linha = document.createElement('div');
-        linha.className = 'cena-entrada';
-
-        var icone = document.createElement('span');
-        icone.className = 'cena-ic cena-ic--' + item.tom;
-        icone.textContent = item.icone;
-
-        var texto = document.createElement('span');
-        texto.className = 'cena-txt';
-
-        var nome = document.createElement('span');
-        nome.className = 'cena-nome';
-        nome.textContent = item.nome;
-
-        var det = document.createElement('span');
-        det.className = 'cena-det';
-        det.textContent = item.det;
-
-        texto.appendChild(nome);
-        texto.appendChild(det);
-        linha.appendChild(icone);
-        linha.appendChild(texto);
-        entradas.appendChild(linha);
+      Array.prototype.forEach.call(telas, function (img, j) {
+        img.classList.toggle('on', j === i);
       });
     }
-
-    var atual = 0;
-    var letras = 0;
-    var apagando = false;
-
-    /* Reserva a altura da tela pela cena mais alta, medida de verdade: a
-       quebra de linha depende da largura e da fonte, então um número fixo
-       erraria em alguma tela. */
-    function reservarAltura() {
-      corpo.style.minHeight = '';
-      var maior = 0;
-      CENAS.forEach(function (_, i) {
-        pintar(i);
-        maior = Math.max(maior, corpo.getBoundingClientRect().height);
-      });
-      corpo.style.minHeight = Math.ceil(maior) + 'px';
-      pintar(atual);
-    }
-
-    reservarAltura();
-
-    /* As fontes embutidas só ficam prontas depois do primeiro layout. Sem
-       remedir aqui, a reserva fica com a altura da fonte de fallback, que é
-       mais larga e quebra uma linha a mais. */
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(reservarAltura);
-    }
-
-    var esperaResize;
-    window.addEventListener('resize', function () {
-      window.clearTimeout(esperaResize);
-      esperaResize = window.setTimeout(reservarAltura, 150);
-    });
 
     if (reduz.matches || falas.length === 0) {
-      /* sem animação: primeira pergunta e a tela correspondente, paradas */
+      /* sem animação: primeira pergunta e o print correspondente, parados */
       saida.textContent = falas[0] || '';
+      pintar(0);
       marcar(0);
     } else {
       (function ciclo() {
@@ -1340,16 +1186,11 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         saida.textContent = fala.slice(0, letras);
         if (letras > 0) { return window.setTimeout(ciclo, MS_APAGA); }
 
-        /* pergunta apagada: a tela do app some, troca de conteúdo e volta,
-           enquanto a próxima pergunta começa a ser digitada */
+        /* pergunta apagada: troca o print enquanto a próxima é digitada */
         apagando = false;
         atual = (atual + 1) % falas.length;
         marcar(atual);
-        corpo.classList.add('trocando');
-        window.setTimeout(function () {
-          pintar(atual);
-          corpo.classList.remove('trocando');
-        }, MS_TROCA);
+        pintar(atual);
 
         return window.setTimeout(ciclo, MS_TROCA);
       }());
