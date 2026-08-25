@@ -309,10 +309,19 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .hero .hero-cta,
 .hero .hero-preco{position:relative;z-index:1}
 
+/* vidro fosco: a pill recua e para de competir com a headline */
 .hero .pill{
-  background:#FFFFFF;color:#241442;
-  font-size:11px;font-weight:700;padding:7px 15px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.30);
+  color:#FFFFFF;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  /* 6/14 + 1px de borda fecha na mesma caixa dos 7/15 sem borda de antes */
+  font-size:11px;font-weight:700;padding:6px 14px;
   border-radius:999px;margin-bottom:14px;
+}
+/* o relógio usa currentColor, então acompanha o branco */
+@supports not (backdrop-filter:blur(8px)){
+  .hero .pill{background:rgba(255,255,255,.22)}
 }
 /* nada de cor de parágrafo no nível da seção: ela vazaria para dentro do
    cartão branco de confiança */
