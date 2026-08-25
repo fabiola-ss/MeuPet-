@@ -30,7 +30,6 @@ ALVOS = [
     ("__PRINT_HISTORICO__", ["prints/app-historico.webp"],       False),
     ("__PRINT_SOS__",      ["prints/app-modo-sos.webp"],         False),
     ("__PRINT_REMEDIO__",  ["prints/app-lembrete-remedio.webp"], False),
-    ("__PRINT_PDF__",      ["prints/app-historico-pdf.webp"],    False),
 ]
 
 

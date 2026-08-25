@@ -489,7 +489,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .nota-pets{margin:48px 0 0;text-align:center;font-size:13px;line-height:1.5;opacity:.85}
 
 /* ----------------------------------------- 12. Features (carrossel lateral) */
-.carrossel-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s5)}
+/* seção mais justa: sem os prints, os cards ficaram baixos e o respiro de
+   80px do .section sobrava dos dois lados */
+#recursos{padding-block:var(--s6)}
+.carrossel-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s4)}
 .carrossel-nav{display:none;gap:var(--s2);flex:none}
 @media (min-width:768px){.carrossel-nav{display:flex}}
 .carrossel-nav button{
@@ -519,29 +522,21 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .card-f{
   flex:0 0 clamp(230px,72vw,282px);scroll-snap-align:start;height:auto;
   display:flex;flex-direction:column;
-  background:var(--branco);border-radius:var(--r-md);padding:var(--s4);
+  background:var(--branco);border-radius:var(--r-md);padding:20px;
   box-shadow:var(--sh-leve);transition:var(--t);
 }
 .card-f:hover{box-shadow:var(--sh-media);transform:translateY(-2px)}
 /* ícones do carrossel: badge maior, cantos arredondados e traço mais grosso.
    Escopado em .card-f — os badges da lista do Problema seguem circulares. */
-.card-f .badge{width:64px;height:64px;border-radius:20px;margin-bottom:var(--s3)}
+.card-f .badge{width:64px;height:64px;border-radius:20px;margin-bottom:12px}
 .card-f .badge svg{width:30px;height:30px;stroke-width:2.8}
 .card-f .badge--rosa{background:linear-gradient(160deg,#FCE1EC,#FAD0E4)}
 .card-f .badge--roxo{background:linear-gradient(160deg,#F1E3FA,#E7D0F7)}
 .card-f .badge--laranja{background:linear-gradient(160deg,#FFE8D9,#FFD8BF)}
 .card-f h3{margin-bottom:var(--s2)}
-.card-f p{font-size:var(--body);color:var(--txt-corpo)}
-.card-f-print{
-  display:block;width:100%;height:120px;margin-top:var(--s3);
-  object-fit:cover;object-position:top;
-  border-radius:14px;border:1px solid rgba(36,20,66,.08);
-}
+.card-f p{font-size:var(--body);color:var(--txt-corpo);margin-bottom:0}
 @media (min-width:1024px){
   .card-f{flex-basis:330px}
-  /* com alturas iguais, cada pixel de print vira espaço vazio nos seis cards
-     sem imagem — 140px é onde o print ainda se lê sem inchar a fileira */
-  .card-f-print{height:140px}
 }
 .dica-rolar{display:flex;align-items:center;gap:var(--s2);font-size:var(--caption);color:var(--txt-apoio)}
 .dica-rolar svg{width:16px;height:16px;flex:none}
@@ -1016,7 +1011,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         </span>
         <h3>Lembretes automáticos</h3>
         <p>Você recebe notificações automáticas pra não esquecer datas e cuidados importantes.</p>
-        <img class="card-f-print" src="__PRINT_REMEDIO__" width="738" height="1439" alt="Tela de cadastro de remédio no aplicativo, com nome, dosagem, duração em dias, horários das doses e a opção de criar lembrete." loading="lazy" decoding="async">
       </li>
       <li class="card-f rv" style="--d:.18s">
         <span class="badge badge--roxo" aria-hidden="true">
@@ -1024,7 +1018,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         </span>
         <h3>Histórico em PDF</h3>
         <p>Gere um PDF atualizado na hora, pronto pra levar ao veterinário.</p>
-        <img class="card-f-print" src="__PRINT_PDF__" width="738" height="1439" alt="Documento de histórico médico gerado pelo aplicativo, com os dados do pet e a lista de registros, pronto para imprimir ou salvar em PDF." loading="lazy" decoding="async">
       </li>
     </ul>
 
