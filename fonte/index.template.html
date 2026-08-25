@@ -224,6 +224,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .grupo-cta{display:flex;flex-direction:column;gap:var(--s3);align-items:flex-start}
 .grupo-cta--center{align-items:center;text-align:center}
 .nota{font-style:italic;font-size:var(--caption);line-height:1.5;color:var(--txt-apoio)}
+/* CTA de meio de página: um a cada duas seções, entre o hero e a oferta */
+.cta-secao{display:flex;justify-content:center;margin-top:var(--s6)}
+.cta-secao .btn{width:100%;max-width:400px}
+@media (min-width:768px){.cta-secao .btn{width:auto}}
 .nota--clara{color:rgba(255,255,255,.82)}
 
 /* -------------------------------------------- 7. Bordas orgânicas (SVG) */
@@ -906,6 +910,14 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
       <p class="lead"><strong>O problema não é falta de cuidado. É falta de um lugar certo pra guardar tudo.</strong></p>
       <p class="lead">E quando essa informação falta — numa emergência, numa consulta, numa internação — o prejuízo não é só de tempo.</p>
     </div>
+
+    <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
+    <div class="cta-secao rv">
+      <a class="btn btn--primario" href="#oferta">
+        QUERO CUIDAR DO MEU PET
+        <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1013,6 +1025,14 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         <img class="card-f-print" src="__PRINT_PDF__" width="738" height="1439" alt="Documento de histórico médico gerado pelo aplicativo, com os dados do pet e a lista de registros, pronto para imprimir ou salvar em PDF." loading="lazy" decoding="async">
       </li>
     </ul>
+
+    <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
+    <div class="cta-secao rv">
+      <a class="btn btn--primario" href="#oferta">
+        QUERO CUIDAR DO MEU PET
+        <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1073,6 +1093,14 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
         <p>Só abrir o aplicativo quando precisar.</p>
       </li>
     </ol>
+
+    <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
+    <div class="cta-secao rv">
+      <a class="btn btn--primario" href="#oferta">
+        QUERO CUIDAR DO MEU PET
+        <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
