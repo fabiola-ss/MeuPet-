@@ -242,6 +242,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 /* um bloco só, um gradiente só: um segundo container com gradiente próprio
    deixaria uma emenda visível onde as duas rampas de cor não batem */
 .hero{
+  position:relative;
   background:linear-gradient(165deg,#241442 0%,#4A2378 50%,#7B2FA8 100%);
   /* os 26px de folga são contados a partir do header fixo, senão a pill
      entraria por baixo dele */
@@ -250,6 +251,27 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 }
 .hero .container{position:relative;padding-inline:0}
 .hero-copy{max-width:420px;margin-inline:auto;text-align:center}
+
+/* brilho magenta atrás do celular — único elemento decorativo do hero */
+.hero-glow{
+  position:absolute;z-index:0;
+  width:460px;height:460px;left:50%;top:46%;
+  transform:translate(-50%,-30%);
+  background:radial-gradient(circle,
+    rgba(236,19,97,.50) 0%,
+    rgba(236,19,97,.18) 45%,
+    rgba(0,0,0,0) 70%);
+  pointer-events:none;
+}
+/* todo o conteúdo passa por cima do brilho */
+.hero .pill,
+.hero h1,
+.hero .hero-sub,
+.hero-device,
+.trust-card,
+.hero .hero-cta,
+.hero .hero-preco{position:relative;z-index:1}
+
 .hero .pill{
   background:#FFFFFF;color:#241442;
   font-size:11px;font-weight:700;padding:7px 15px;
@@ -310,6 +332,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   .hero .hero-sub{font-size:16px}
   .hero-device{width:320px}
   .hero-device img{height:360px}
+  .hero-glow{width:620px;height:620px}
 }
 
 /* --------------------------- 9. Identificação (cena: pergunta -> app) */
@@ -755,6 +778,9 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
 <!-- ==================== 1. HERO — bloco sólido (gradiente da marca) ====== -->
 <section class="hero solida" id="topo" aria-labelledby="hero-titulo">
+  <!-- brilho magenta atrás do celular: decorativo, sem conteúdo -->
+  <div class="hero-glow" aria-hidden="true"></div>
+
   <div class="container">
     <div class="hero-copy rv">
       <p class="pill">
