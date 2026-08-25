@@ -502,10 +502,12 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .carrossel-nav svg{width:20px;height:20px}
 /* a trilha sangra até a borda direita, deixando o próximo card cortado */
 .trilha{
-  /* altura natural por card: com stretch, os seis cards sem print ficam com
-     um vazio branco dentro, que lê pior do que a sobra abaixo da fileira */
-  display:flex;align-items:flex-start;gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;
-  padding-block:var(--s2) var(--s5);
+  /* stretch: todos os cards ficam com a altura do mais alto, e a sobra que
+     antes ficava abaixo da fileira deixa de existir */
+  display:flex;align-items:stretch;gap:var(--s3);overflow-x:auto;scroll-snap-type:x mandatory;
+  /* 20px embaixo é o que a sombra do card precisa pra não ser cortada pelo
+     overflow; o resto dos 32px até o botão vem da margem do .cta-secao */
+  padding-block:var(--s2) 20px;
   margin-right:calc(50% - 50vw);padding-right:max(var(--s4),calc(50vw - 50% + var(--s4)));
   scrollbar-width:none;-ms-overflow-style:none;
 }
@@ -515,7 +517,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 }
 .trilha:focus-visible{outline:2px solid var(--roxo);outline-offset:4px}
 .card-f{
-  flex:0 0 clamp(230px,72vw,282px);scroll-snap-align:start;
+  flex:0 0 clamp(230px,72vw,282px);scroll-snap-align:start;height:auto;
   display:flex;flex-direction:column;
   background:var(--branco);border-radius:var(--r-md);padding:var(--s4);
   box-shadow:var(--sh-leve);transition:var(--t);
@@ -531,21 +533,21 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 .card-f h3{margin-bottom:var(--s2)}
 .card-f p{font-size:var(--body);color:var(--txt-corpo)}
 .card-f-print{
-  /* ancorado no rodapé do card: com alturas iguais na trilha, o print de um
-     card não deixa buraco no meio dos outros */
-  display:block;width:100%;height:130px;margin-top:var(--s3);
+  display:block;width:100%;height:120px;margin-top:var(--s3);
   object-fit:cover;object-position:top;
   border-radius:14px;border:1px solid rgba(36,20,66,.08);
 }
 @media (min-width:1024px){
   .card-f{flex-basis:330px}
-  /* 180px é o meio-termo: o print cresce, mas os dois cards com imagem não
-     ficam tão mais altos que os outros a ponto de abrir um vão na trilha */
-  .card-f-print{height:180px}
+  /* com alturas iguais, cada pixel de print vira espaço vazio nos seis cards
+     sem imagem — 140px é onde o print ainda se lê sem inchar a fileira */
+  .card-f-print{height:140px}
 }
 .dica-rolar{display:flex;align-items:center;gap:var(--s2);font-size:var(--caption);color:var(--txt-apoio)}
 .dica-rolar svg{width:16px;height:16px;flex:none}
 @media (min-width:768px){.dica-rolar{display:none}}
+/* 20px da trilha + 12px daqui = os ~32px entre os cards e o botão */
+#recursos .cta-secao{margin-top:12px}
 
 /* ----------------------------------- 13. Modo SOS (cartão de emergência) */
 .sos{background:linear-gradient(170deg,#2B1A4D 0%,#3D2168 100%)}
