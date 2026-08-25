@@ -207,20 +207,53 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
   min-height:50px;padding:15px var(--s5);
   font-family:var(--font-body);font-size:var(--button);font-weight:700;line-height:1.2;text-align:center;
-  border-radius:var(--r-pill);border:2px solid transparent;cursor:pointer;transition:var(--t);
+  border-radius:var(--r-pill);border:2px solid transparent;cursor:pointer;
+  /* relative+hidden seguram o brilho do hero dentro do pill */
+  position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent;
+  transition:transform .16s ease,box-shadow .16s ease;
 }
+/* feedback de toque: é o que funciona no celular, onde :hover não existe */
+.btn:active{transform:scale(.97);box-shadow:0 4px 12px rgba(255,107,53,.3)}
 .btn--primario{background:var(--grad-cta);color:#FFFFFF;box-shadow:var(--sh-cta)}
 .btn--primario:hover{background:var(--cta-hover);color:#FFFFFF;box-shadow:var(--sh-cta-hover);transform:translateY(-2px)}
-.btn--primario:active{background:var(--cta-active);color:#FFFFFF;box-shadow:0 4px 12px rgba(255,107,53,.3);transform:translateY(0)}
+.btn--primario:active{background:var(--cta-active);color:#FFFFFF;box-shadow:0 4px 12px rgba(255,107,53,.3);transform:scale(.97)}
 /* variante invertida — só sobre a seção de oferta, que já é laranja */
 .btn--claro{background:var(--branco);color:var(--navy);box-shadow:0 8px 24px rgba(120,30,10,.22)}
 .btn--claro:hover{background:var(--branco);color:var(--magenta);box-shadow:0 12px 30px rgba(120,30,10,.28);transform:translateY(-2px)}
-.btn--claro:active{transform:translateY(0);box-shadow:0 4px 14px rgba(120,30,10,.2)}
+.btn--claro:active{transform:scale(.97);box-shadow:0 4px 14px rgba(120,30,10,.2)}
 .btn--sm{min-height:44px;padding:11px var(--s4);font-size:var(--caption)}
 .btn--bloco{display:flex;width:100%}
 .btn--largo{max-width:440px}
 .seta{flex:none;transition:transform .2s ease-out}
 .btn:hover .seta{transform:translateX(3px)}
+/* 1. hero — brilho atravessando o pill */
+.btn-shimmer::after{
+  content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;
+  background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.42) 50%,rgba(255,255,255,0) 100%);
+  transform:skewX(-18deg);animation:shine 3.6s ease-in-out infinite;
+}
+@keyframes shine{0%{left:-60%}45%{left:120%}100%{left:120%}}
+
+/* 2. oferta — anel branco girando em volta do botão */
+.ring{position:relative;padding:3px;border-radius:var(--r-pill);overflow:hidden;width:100%}
+.ring::before{
+  content:"";position:absolute;inset:-60%;
+  background:conic-gradient(from 0deg,transparent 0deg,rgba(255,255,255,.95) 50deg,
+    rgba(255,220,190,.7) 110deg,transparent 190deg,transparent 360deg);
+  animation:spin 3.4s linear infinite;
+}
+.ring .btn{position:relative;z-index:1}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 3. CTAs de meio de página — a seta empurrando pra frente */
+.btn-arrow .seta{animation:nudge 2.2s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+
+/* o toque continua respondendo com movimento reduzido — não é decoração */
+@media (prefers-reduced-motion:reduce){
+  .btn-shimmer::after,.btn-arrow .seta,.ring::before{animation:none}
+}
+
 .grupo-cta{display:flex;flex-direction:column;gap:var(--s3);align-items:flex-start}
 .grupo-cta--center{align-items:center;text-align:center}
 .nota{font-style:italic;font-size:var(--caption);line-height:1.5;color:var(--txt-apoio)}
@@ -325,7 +358,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   margin:0 0 10px;
 }
 .hero .hero-cta:hover{box-shadow:0 12px 28px rgba(255,107,53,.5);transform:translateY(-2px)}
-.hero .hero-cta:active{box-shadow:0 4px 12px rgba(255,107,53,.35);transform:translateY(0)}
+.hero .hero-cta:active{box-shadow:0 4px 12px rgba(255,107,53,.35);transform:scale(.97)}
 .hero .hero-preco{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.82);margin:0}
 .hero .hero-preco strong{font-weight:700;color:#FFFFFF}
 
@@ -806,7 +839,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
       </div>
 
       <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
-      <a class="btn btn--primario hero-cta" href="#oferta">
+      <a class="btn btn--primario hero-cta btn-shimmer" href="#oferta">
         QUERO CUIDAR DO MEU PET
         <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
       </a>
@@ -910,7 +943,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
     <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
     <div class="cta-secao rv">
-      <a class="btn btn--primario" href="#oferta">
+      <a class="btn btn--primario btn-arrow" href="#oferta">
         QUERO CUIDAR DO MEU PET
         <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
       </a>
@@ -1023,7 +1056,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
     <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
     <div class="cta-secao rv">
-      <a class="btn btn--primario" href="#oferta">
+      <a class="btn btn--primario btn-arrow" href="#oferta">
         QUERO CUIDAR DO MEU PET
         <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
       </a>
@@ -1091,7 +1124,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
     <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
     <div class="cta-secao rv">
-      <a class="btn btn--primario" href="#oferta">
+      <a class="btn btn--primario btn-arrow" href="#oferta">
         QUERO CUIDAR DO MEU PET
         <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
       </a>
@@ -1134,10 +1167,12 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 
       <div class="grupo-cta grupo-cta--center">
         <!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
-        <a class="btn btn--claro btn--bloco" href="#oferta">
-          COMEÇAR MEUS 7 DIAS GRÁTIS
-          <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-        </a>
+        <div class="ring">
+          <a class="btn btn--claro btn--bloco" href="#oferta">
+            COMEÇAR MEUS 7 DIAS GRÁTIS
+            <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
         <p class="nota nota--clara">Cancele quando quiser. A cobrança só começa depois dos 7 dias grátis.</p>
       </div>
       </div>
