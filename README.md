@@ -11,15 +11,18 @@ O GitHub Pages serve pelo caminho da pasta: o que está em `home/index.html`
 aparece em `meupetmais.com.br/home/`. Por isso a página gerada mora em `home/`,
 e não na raiz.
 
-A raiz **não tem** `index.html`, de propósito: só `meupetmais.com.br/home/`
-abre o site. O domínio puro cai no 404 do GitHub Pages.
-
-Na raiz ficam dois arquivos de publicação:
+Na raiz ficam três arquivos de publicação:
 
 | Arquivo | Para que serve |
 |---|---|
 | `CNAME` | Diz ao Pages qual domínio serve este repositório. |
+| `index.html` | Manda quem digita o domínio puro para `/home/`, preservando `?utm_...` e âncora. Sem ele, `meupetmais.com.br` dá 404. |
 | `.nojekyll` | Desliga o Jekyll — o site é HTML puro, não precisa de processamento. |
+
+> O Pages não faz redirect de servidor (nada de 301), então o da raiz é uma
+> página com `location.replace` mais `meta refresh`. Ela fica em cache no
+> navegador por ~10 min: se um dia você mexer nela e parecer que não mudou,
+> teste numa janela anônima antes de procurar outro culpado.
 
 ### Configuração, uma vez só
 
