@@ -1,25 +1,51 @@
 # MeuPet+ — Landing Page
 
-Página de vendas do aplicativo **MeuPet+**, em **arquivo único** (`index.html`):
+Página de vendas do aplicativo **MeuPet+**, em **arquivo único** (`home/index.html`):
 CSS, JavaScript, fontes e imagens estão todos embutidos. **Nenhuma requisição
 externa** ao abrir a página. Sem framework, sem etapa de build no deploy —
-o `index.html` sozinho já é o site.
+o `home/index.html` sozinho já é o site.
 
-## Publicar no Netlify
+## Publicar no GitHub Pages em meupetmais.com.br/home
 
-**Add new site → Import an existing project → GitHub → fabiola-ss/MeuPet-**
+O GitHub Pages serve pelo caminho da pasta: o que está em `home/index.html`
+aparece em `meupetmais.com.br/home/`. Por isso a página gerada mora em `home/`,
+e não na raiz.
 
-- **Branch to deploy:** `claude/landing-page-html-css-js-kzivtn`
-- **Build command:** deixe **vazio**
-- **Publish directory:** `.` (um ponto)
+Na raiz ficam três arquivos de publicação:
 
-Todo push nessa branch republica o site.
+| Arquivo | Para que serve |
+|---|---|
+| `CNAME` | Diz ao Pages qual domínio serve este repositório. |
+| `index.html` | Redireciona quem digita o domínio puro para `/home/`. Sem ele, `meupetmais.com.br` dá 404. |
+| `.nojekyll` | Desliga o Jekyll — o site é HTML puro, não precisa de processamento. |
+
+### Configuração, uma vez só
+
+1. **Settings → Pages → Build and deployment → Source: Deploy from a branch**
+2. **Branch:** `claude/landing-page-html-css-js-kzivtn` · **Folder:** `/ (root)`
+3. **Custom domain:** `meupetmais.com.br` → Save, e marque **Enforce HTTPS**
+   depois que o certificado sair (leva alguns minutos).
+
+### DNS, no painel do domínio
+
+Domínio de topo (`meupetmais.com.br`) precisa de quatro registros **A**:
+
+```
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
+
+E um **CNAME** de `www` para `fabiola-ss.github.io`.
+
+Todo push na branch republica o site.
 
 ## Antes de publicar: dois pendentes
 
 ### 1. Link de checkout
 
-Os três CTAs apontam para a seção de oferta (`#oferta`) como espaço reservado.
+Os CTAs apontam para a seção de oferta (`#oferta`) como espaço reservado.
 Troque pelo link real de assinatura. Procure no `fonte/index.template.html`:
 
 ```
@@ -28,25 +54,25 @@ Troque pelo link real de assinatura. Procure no `fonte/index.template.html`:
 
 ### 2. Peso da página
 
-Os cinco prints do app são embutidos em base64, então o `index.html` fica em
-torno de **930 KB**. Como os prints estão dentro do HTML, o `loading="lazy"`
+Os prints do app são embutidos em base64, então o `index.html` fica em
+torno de **780 KB**. Como os prints estão dentro do HTML, o `loading="lazy"`
 não reduz o que é baixado: o navegador precisa do arquivo inteiro antes de
 desenhar qualquer coisa.
 
 Se a velocidade de carregamento incomodar, o caminho é servir os prints como
-arquivos separados ao lado do `index.html` em vez de embutidos — o HTML volta
+arquivos separados ao lado do `home/index.html` em vez de embutidos — o HTML volta
 para ~160 KB e as imagens passam a carregar em paralelo e sob demanda. Isso
-abre mão do "arquivo único", mas no Netlify (que publica a pasta inteira) não
+abre mão do "arquivo único", mas no Pages (que publica a pasta inteira) não
 faz diferença nenhuma no deploy.
 
 ## Arquivos
 
 | Arquivo | Para que serve |
 |---|---|
-| `index.html` | **A página.** Único arquivo necessário para publicar. |
+| `home/index.html` | **A página.** Único arquivo necessário para publicar. |
 | `fonte/index.template.html` | HTML de origem, com marcadores no lugar das fontes e imagens. É aqui que se edita. |
-| `fonte/build.py` | Gera o `index.html`. Rode depois de qualquer edição. |
-| `fonte/prints/*.webp` | Os cinco prints reais do aplicativo, em WebP. |
+| `fonte/build.py` | Gera o `home/index.html`. Rode depois de qualquer edição. |
+| `fonte/prints/*.webp` | Os prints reais do aplicativo, em WebP. |
 | `fonte/baloo2.woff2` | Baloo 2 (Google Fonts, subset latin, SIL OFL 1.1). |
 | `fonte/jakarta.woff2` | Plus Jakarta Sans (Google Fonts, subset latin, SIL OFL 1.1). |
 

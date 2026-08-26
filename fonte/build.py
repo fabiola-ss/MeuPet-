@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gera o index.html final (arquivo único) a partir de fonte/index.template.html.
+"""Gera home/index.html (arquivo único) a partir de fonte/index.template.html.
 
 Troca os marcadores do template pelos data URIs das fontes e das imagens, para
 que a página publicada não faça nenhuma requisição externa.
@@ -65,9 +65,12 @@ def main() -> None:
         valor = b64 if e_fonte else "data:{};base64,{}".format(TIPOS[escolhido.suffix.lower()], b64)
         html = html.replace(marcador, valor)
 
-    destino = RAIZ / "index.html"
+    # a página fica em home/ porque o GitHub Pages serve pelo caminho da pasta:
+    # home/index.html -> meupetmais.com.br/home/
+    destino = RAIZ / "home" / "index.html"
+    destino.parent.mkdir(exist_ok=True)
     destino.write_text(html, encoding="utf-8")
-    print("index.html gerado com {:.0f} KB".format(destino.stat().st_size / 1024))
+    print("home/index.html gerado com {:.0f} KB".format(destino.stat().st_size / 1024))
     if avisos:
         print("\nfotos pendentes:")
         print("\n".join(avisos))
