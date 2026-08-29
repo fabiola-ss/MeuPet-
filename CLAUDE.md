@@ -42,8 +42,8 @@ Nunca edite `home/index.html` na mão: ele é gerado e será sobrescrito.
 | `fonte/` | Template, `build.py`, fontes `.woff2` e os prints em WebP. |
 | `CNAME`, `.nojekyll` | Configuração do GitHub Pages. |
 
-## Pendência aberta
+## Links
 
-**Link de checkout.** Os 5 CTAs apontam para `#oferta` como espaço reservado —
-ninguém consegue assinar ainda. Quando a URL de assinatura existir, procure por
-`<!-- Link de checkout` no `fonte/index.template.html`.
+Os 7 botões de CTA levam para **`https://app.meupetmais.com.br/`**, o cadastro
+no app. Os três links "Preço" do menu são âncora para `#oferta` de propósito —
+navegação dentro da página, não conversão.

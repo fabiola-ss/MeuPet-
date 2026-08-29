@@ -48,14 +48,11 @@ Todo push na branch republica o site.
 
 ## Antes de publicar: dois pendentes
 
-### 1. Link de checkout
+### 1. ~~Link de checkout~~ — resolvido
 
-Os CTAs apontam para a seção de oferta (`#oferta`) como espaço reservado.
-Troque pelo link real de assinatura. Procure no `fonte/index.template.html`:
-
-```
-<!-- Link de checkout: troque o href abaixo pela URL de assinatura do app. -->
-```
+Os 7 botões apontam para `https://app.meupetmais.com.br/`. Os links "Preço"
+do menu seguem como âncora para a seção de oferta, que é o comportamento
+certo para navegação.
 
 ### 2. Peso da página
 
