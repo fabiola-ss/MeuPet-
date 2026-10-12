@@ -37,7 +37,7 @@ Nunca edite `home/index.html` na mão: ele é gerado e será sobrescrito.
 
 | Caminho | O que é |
 |---|---|
-| `home/index.html` | A página. Arquivo único: CSS, JS, fontes e prints embutidos, zero requisição externa. |
+| `home/index.html` | A página. Arquivo único: CSS, JS, fontes e prints embutidos; só o Meta Pixel sai para fora. |
 | `index.html` (raiz) | Só redireciona `/` para `/home/`, preservando query string e âncora. |
 | `fonte/` | Template, `build.py`, fontes `.woff2` e os prints em WebP. |
 | `CNAME`, `.nojekyll` | Configuração do GitHub Pages. |
@@ -47,3 +47,9 @@ Nunca edite `home/index.html` na mão: ele é gerado e será sobrescrito.
 Os 7 botões de CTA levam para **`https://app.meupetmais.com.br/`**, o cadastro
 no app. Os três links "Preço" do menu são âncora para `#oferta` de propósito —
 navegação dentro da página, não conversão.
+
+## Meta Pixel
+
+ID **2132717657636358**, no `<head>` do template, antes do `<style>`. Dispara
+só `PageView`. Como os CTAs saem para outro domínio, conversão depende do pixel
+estar no `app.meupetmais.com.br` também.

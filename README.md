@@ -1,9 +1,22 @@
 # MeuPet+ — Landing Page
 
 Página de vendas do aplicativo **MeuPet+**, em **arquivo único** (`home/index.html`):
-CSS, JavaScript, fontes e imagens estão todos embutidos. **Nenhuma requisição
-externa** ao abrir a página. Sem framework, sem etapa de build no deploy —
+CSS, JavaScript, fontes e imagens estão todos embutidos. A **única requisição
+externa** é o Meta Pixel. Sem framework, sem etapa de build no deploy —
 o `home/index.html` sozinho já é o site.
+
+## Meta Pixel
+
+ID **2132717657636358**, no `<head>`, logo antes do `<style>`. Dispara
+`PageView` em toda visita, mais o `<noscript>` com a imagem de rastreio para
+quem estiver sem JavaScript.
+
+Carrega assíncrono: se o `connect.facebook.net` estiver fora do ar ou bloqueado
+por um adblock, a página abre igual — conferido abortando a requisição.
+
+Os CTAs levam para outro domínio (`app.meupetmais.com.br`), então **só o
+PageView acontece aqui**. Conversão (cadastro, assinatura) precisa do pixel
+instalado lá também — ou de um evento de clique nos botões desta página.
 
 ## Publicar no GitHub Pages em meupetmais.com.br/home
 
