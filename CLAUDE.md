@@ -50,6 +50,9 @@ navegação dentro da página, não conversão.
 
 ## Meta Pixel
 
-ID **2132717657636358**, no `<head>` do template, antes do `<style>`. Dispara
-só `PageView`. Como os CTAs saem para outro domínio, conversão depende do pixel
-estar no `app.meupetmais.com.br` também.
+Dois IDs, **2132717657636358** e **1575089756936440**, no `<head>` do template,
+antes do `<style>`. Disparam só `PageView`, os dois no mesmo carregamento — um
+`fbq('track', ...)` vale para ambos; para um só, `fbq('trackSingle','<id>',...)`.
+
+Como os CTAs saem para outro domínio, conversão depende do pixel estar no
+`app.meupetmais.com.br` também.

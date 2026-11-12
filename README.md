@@ -7,9 +7,13 @@ o `home/index.html` sozinho já é o site.
 
 ## Meta Pixel
 
-ID **2132717657636358**, no `<head>`, logo antes do `<style>`. Dispara
-`PageView` em toda visita, mais o `<noscript>` com a imagem de rastreio para
-quem estiver sem JavaScript.
+Dois IDs, **2132717657636358** e **1575089756936440**, no `<head>`, logo antes
+do `<style>`. Ambos disparam `PageView` em toda visita, mais o `<noscript>` com
+uma imagem de rastreio para cada um, para quem estiver sem JavaScript.
+
+O `fbevents.js` é baixado uma vez só e os dois IDs usam a mesma biblioteca. Um
+`fbq('track', ...)` vale para os dois; para mandar um evento só para um deles,
+use `fbq('trackSingle', '<id>', ...)`.
 
 Carrega assíncrono: se o `connect.facebook.net` estiver fora do ar ou bloqueado
 por um adblock, a página abre igual — conferido abortando a requisição.
